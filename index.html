@@ -1,557 +1,1025 @@
-<!DOCTYPE html><html class="light" lang="en" style=""><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Tax-Simplicity Advisor</title>
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com" rel="preconnect">
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&amp;family=Inter:wght@300..700&amp;display=swap" rel="stylesheet">
-<!-- Material Symbols -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- Tailwind Config -->
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                            "secondary": "#006b58",
-                            "surface-container": "#e9eef6",
-                            "surface-dim": "#d5dae2",
-                            "on-secondary-container": "#00725e",
-                            "outline": "#75777e",
-                            "background": "#f7f9ff",
-                            "inverse-primary": "#b5c7ea",
-                            "on-secondary-fixed": "#002019",
-                            "on-surface": "#171c22",
-                            "on-primary-fixed-variant": "#364764",
-                            "on-error-container": "#93000a",
-                            "tertiary-fixed-dim": "#ecc246",
-                            "tertiary-fixed": "#ffe08e",
-                            "surface-bright": "#f7f9ff",
-                            "primary-container": "#0b1f3a",
-                            "error-container": "#ffdad6",
-                            "on-primary-fixed": "#071c36",
-                            "on-tertiary-fixed": "#241a00",
-                            "on-tertiary-fixed-variant": "#584400",
-                            "surface-variant": "#dee3eb",
-                            "surface-tint": "#4d5f7d",
-                            "surface-container-lowest": "#ffffff",
-                            "surface-container-highest": "#dee3eb",
-                            "on-primary": "#ffffff",
-                            "outline-variant": "#c4c6ce",
-                            "on-surface-variant": "#44474d",
-                            "error": "#ba1a1a",
-                            "surface-container-low": "#eff4fc",
-                            "surface-container-high": "#e3e8f0",
-                            "primary-fixed": "#d6e3ff",
-                            "inverse-surface": "#2b3137",
-                            "tertiary": "#755b00",
-                            "secondary-fixed": "#99f4da",
-                            "on-primary-container": "#7587a7",
-                            "secondary-fixed-dim": "#7dd7be",
-                            "inverse-on-surface": "#ecf1f9",
-                            "on-tertiary": "#ffffff",
-                            "on-tertiary-container": "#503d00",
-                            "on-background": "#171c22",
-                            "on-secondary-fixed-variant": "#005142",
-                            "on-error": "#ffffff",
-                            "primary": "#000615",
-                            "tertiary-container": "#cea72c",
-                            "on-secondary": "#ffffff",
-                            "surface": "#f7f9ff",
-                            "secondary-container": "#99f4da",
-                            "primary-fixed-dim": "#b5c7ea"
-                    },
-                    "borderRadius": {
-                            "DEFAULT": "0.25rem",
-                            "lg": "0.5rem",
-                            "xl": "0.75rem",
-                            "full": "9999px"
-                    },
-                    "spacing": {
-                            "gutter": "16px",
-                            "section-gap-lg": "64px",
-                            "container-padding": "24px",
-                            "unit": "8px",
-                            "section-gap-md": "32px"
-                    },
-                    "fontFamily": {
-                            "headline-md": ["Fraunces"],
-                            "headline-lg": ["Fraunces"],
-                            "body-md": ["Inter"],
-                            "body-lg": ["Inter"],
-                            "body-sm": ["Inter"],
-                            "label-md": ["Inter"],
-                            "label-sm": ["Inter"],
-                            "display-lg": ["Fraunces"],
-                            "display-lg-mobile": ["Fraunces"]
-                    },
-                    "fontSize": {
-                            "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
-                            "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "500"}],
-                            "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
-                            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                            "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
-                            "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "600"}],
-                            "label-sm": ["12px", {"lineHeight": "1", "fontWeight": "500"}],
-                            "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
-                            "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}]
-                    }
-                },
-            },
-        }
-    </script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informal Economy Tax-Simplicity Advisor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .ambient-shadow {
-            box-shadow: 0 4px 20px rgba(11, 31, 58, 0.06);
-        }
-        .card-border {
-            border: 1px solid #E3E8F0;
-        }
-        .focus-glow:focus-within {
-            border-color: #167D68;
-            box-shadow: 0 0 0 2px rgba(22, 125, 104, 0.2);
-            outline: none;
-        }
-    </style>
+  :root {
+    --navy: #0B1F3A;
+    --blue: #163B65;
+    --bg: #F7F9FC;
+    --card: #FFFFFF;
+    --gold: #C9A227;
+    --gold-soft: #F4E8C8;
+    --text: #172033;
+    --text-muted: #5A6478;
+    --teal: #167D68;
+    --teal-soft: #DCEEE9;
+    --border: #E3E8F0;
+    --radius: 14px;
+    --shadow: 0 4px 20px rgba(11, 31, 58, 0.06);
+    --shadow-lg: 0 12px 40px rgba(11, 31, 58, 0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .display {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+  }
+
+  a { text-decoration: none; color: inherit; }
+  button { font-family: inherit; cursor: pointer; border: none; }
+
+  .container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-mark {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .logo-text {
+    line-height: 1.2;
+  }
+  .logo-text .brand {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--navy);
+  }
+  .logo-text .sub {
+    font-size: 12.5px;
+    color: var(--text-muted);
+  }
+
+  nav.links {
+    display: flex;
+    gap: 34px;
+  }
+  nav.links a {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--text-muted);
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.15s;
+  }
+  nav.links a:hover { color: var(--navy); }
+  nav.links a.active {
+    color: var(--navy);
+    border-bottom: 2px solid var(--gold);
+  }
+
+  @media (max-width: 860px) {
+    nav.links { display: none; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 76px 0 48px;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 56px;
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+  }
+
+  .hero h1 {
+    font-size: 46px;
+    line-height: 1.12;
+    margin-bottom: 20px;
+  }
+  .hero h1 .accent { color: var(--teal); }
+
+  .hero p.lede {
+    font-size: 17px;
+    color: var(--text-muted);
+    max-width: 460px;
+    margin-bottom: 24px;
+  }
+
+  .check-list { display: flex; flex-direction: column; gap: 10px; }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .check-item .dot {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--teal-soft);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .check-item svg { width: 12px; height: 12px; }
+
+  /* hero illustration */
+  .hero-art {
+    position: relative;
+    aspect-ratio: 1 / 0.82;
+    border-radius: 24px;
+    background: linear-gradient(160deg, #FBF3DD 0%, #F7F9FC 60%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* ---------- Input Card ---------- */
+  .advisor-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 32px;
+    margin-top: 16px;
+  }
+  .advisor-card-head {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  .advisor-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: var(--blue);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .advisor-card-head h3 { font-size: 19px; margin-bottom: 4px; }
+  .advisor-card-head p { font-size: 14.5px; color: var(--text-muted); }
+
+  textarea#bizInput {
+    width: 100%;
+    min-height: 120px;
+    resize: vertical;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  textarea#bizInput:focus { border-color: var(--blue); }
+  textarea#bizInput::placeholder { color: #9aa4b8; }
+
+  .card-footer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+  }
+  .char-count { font-size: 13px; color: var(--text-muted); }
+
+  .btn-primary {
+    background: var(--teal);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 13px 26px;
+    border-radius: 9px;
+    transition: background 0.15s, transform 0.1s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-primary:hover { background: #126454; }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--blue);
+    font-size: 14px;
+    font-weight: 500;
+    border: 1.5px solid var(--border);
+    padding: 8px 14px;
+    border-radius: 8px;
+  }
+  .btn-ghost:hover { border-color: var(--blue); }
+
+  .example-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .example-chip {
+    font-size: 12.5px;
+    color: var(--blue);
+    background: #EEF3FA;
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 20px;
+    transition: background 0.15s;
+  }
+  .example-chip:hover { background: var(--gold-soft); }
+
+  /* ---------- Results ---------- */
+  #results {
+    margin-top: 28px;
+    display: none;
+  }
+  #results.show { display: block; animation: fadeUp 0.35s ease; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .results-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .results-header h3 { font-size: 20px; }
+  .results-header .badge {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--teal);
+    background: var(--teal-soft);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .metrics-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 700px) { .metrics-row { grid-template-columns: 1fr; } }
+
+  .metric-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .metric-box .label {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 6px;
+  }
+  .metric-box .value {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  .flag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+  .flag-pill {
+    font-size: 12.5px;
+    font-weight: 600;
+    background: var(--gold-soft);
+    color: #6B5510;
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+
+  .result-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 14px;
+  }
+  .result-block h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 16.5px;
+    color: var(--navy);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .result-block p { font-size: 14.5px; color: var(--text); }
+  .result-block .note { font-size: 13px; color: var(--text-muted); margin-top: 6px; }
+
+  .status-pill {
+    display: inline-block;
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .status-pill.required { background: #FBE7E7; color: #A23A3A; }
+  .status-pill.not-required { background: var(--teal-soft); color: var(--teal); }
+
+  .tax-gauge-wrap {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+  .tax-figure {
+    font-family: 'Fraunces', serif;
+    font-size: 34px;
+    color: var(--navy);
+    font-weight: 700;
+  }
+  .tax-figure .cur { font-size: 20px; color: var(--gold); vertical-align: top; }
+  .gauge-bar-track {
+    flex: 1;
+    min-width: 180px;
+    height: 10px;
+    background: #EFF2F8;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .gauge-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), var(--gold));
+    border-radius: 10px;
+    transition: width 0.6s ease;
+  }
+
+  .benefit-list { display: flex; flex-direction: column; gap: 10px; }
+  .benefit-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .benefit-summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 16px;
+    font-size: 14.5px;
+    font-weight: 600;
+    cursor: pointer;
+    background: #FBFCFE;
+  }
+  .benefit-summary .check-dot {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--teal-soft);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .benefit-summary svg { width: 10px; height: 10px; }
+  .benefit-detail {
+    padding: 0 16px 14px 44px;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    display: none;
+  }
+  .benefit-item.open .benefit-detail { display: block; }
+  .benefit-item.open .benefit-summary { background: var(--teal-soft); }
+
+  .disclaimer-note {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+    margin-top: 6px;
+  }
+
+  /* ---------- What You Will Get ---------- */
+  section.feature-section { padding: 68px 0 24px; }
+  .section-title {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 40px;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 980px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .feature-grid { grid-template-columns: 1fr; } }
+
+  .feature-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 26px 20px;
+    text-align: center;
+    transition: transform 0.18s, box-shadow 0.18s;
+  }
+  .feature-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+
+  .feature-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+  }
+  .feature-card h4 { font-family: 'Fraunces', serif; font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+  .feature-card p { font-size: 13.5px; color: var(--text-muted); }
+
+  /* ---------- How It Works ---------- */
+  section.how-it-works {
+    background: #EEF2F8;
+    padding: 60px 0;
+    margin-top: 40px;
+  }
+  .steps-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  @media (max-width: 860px) {
+    .steps-row { flex-direction: column; gap: 32px; }
+  }
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 210px;
+    position: relative;
+  }
+  .step-icon-wrap {
+    position: relative;
+    width: 64px; height: 64px;
+    margin-bottom: 16px;
+  }
+  .step-icon {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step-num {
+    position: absolute;
+    top: -6px; left: -6px;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step h5 { font-family: 'Fraunces', serif; font-size: 15.5px; color: var(--navy); margin-bottom: 6px; }
+  .step p { font-size: 13px; color: var(--text-muted); }
+
+  .step-arrow {
+    color: #B7C1D4;
+    font-size: 22px;
+    padding-top: 22px;
+  }
+  @media (max-width: 860px) { .step-arrow { display: none; } }
+
+  /* ---------- Why Go Formal ---------- */
+  section.why-formal {
+    background: var(--gold-soft);
+    border-top: 1px solid #EAD9A0;
+    border-bottom: 1px solid #EAD9A0;
+    padding: 40px 0;
+  }
+  .why-inner {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .why-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 220px;
+  }
+  .why-title .shield {
+    width: 46px; height: 46px;
+    border-radius: 12px;
+    background: var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .why-title h4 { font-family: 'Fraunces', serif; font-size: 19px; color: var(--navy); }
+
+  .why-points {
+    display: flex;
+    gap: 34px;
+    flex-wrap: wrap;
+    flex: 1;
+  }
+  .why-point { display: flex; align-items: center; gap: 10px; max-width: 160px; }
+  .why-point svg { width: 22px; height: 22px; color: var(--blue); flex-shrink: 0; }
+  .why-point span { font-size: 13.5px; font-weight: 500; color: var(--text); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 26px 0 40px;
+  }
+  .foot-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: #EEF2F8;
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .foot-note svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; color: var(--blue); }
+</style>
 </head>
-<body class="bg-surface text-on-surface font-body-md antialiased selection:bg-secondary selection:text-white">
-<!-- TopNavBar -->
-<header class="bg-surface dark:bg-primary-container docked full-width top-0 bg-surface dark:bg-primary-container border-b border-outline-variant dark:border-outline shadow-sm sticky top-0 z-50 flex justify-between items-center w-full px-container-padding py-4 max-w-7xl mx-auto">
-<div class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed">
-            Tax-Simplicity Advisor
-        </div>
-<nav class="hidden md:flex gap-6 items-center">
-<a class="font-label-md text-label-md text-secondary dark:text-secondary-fixed border-b-2 border-secondary dark:border-secondary-fixed pb-1 hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 opacity-80 transition-opacity" href="/">Home</a>
-<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200" href="/#how-it-works">How it Works</a>
-<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200" href="/tax-guide">Tax Guide</a>
-<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200" href="/resources">Resources</a>
-<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200" href="/about">About</a>
-</nav>
+<body>
 
-<button class="md:hidden text-primary">
-<span class="material-symbols-outlined">menu</span>
-</button>
+<header>
+  <div class="nav-inner">
+    <div class="logo">
+      <div class="logo-mark">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M6 3H14L18 7V21H6V3Z" stroke="#F7F9FC" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M14 3V7H18" stroke="#F7F9FC" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M9 12H15M9 15.5H15" stroke="#C9A227" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <div class="brand">Informal Economy</div>
+        <div class="sub">Tax-Simplicity Advisor</div>
+      </div>
+    </div>
+    <nav class="links">
+      <a href="#top" class="active">Home</a>
+      <a href="#how-it-works">How it Works</a>
+      <a href="/tax-guide">Tax Guide</a>
+      <a href="#benefits">Benefits</a>
+      <a href="/resources">Resources</a>
+      <a href="/about">About</a>
+    </nav>
+  </div>
 </header>
-<main class="w-full">
-<!-- Hero Section -->
-<section class="max-w-7xl mx-auto px-container-padding py-section-gap-lg flex flex-col-reverse md:flex-row items-center gap-12">
-<div class="flex-1 space-y-6">
-<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary-container">
-                    Understand taxes. Grow your business.
-                </h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
-                    Navigating taxes and formalizing your business shouldn't be overwhelming. Get clear, personalized guidance to help you focus on what you do best—running your business.
-                </p>
-<div class="flex gap-4 pt-4">
 
-</div>
-</div>
-<div class="flex-1 w-full flex justify-center">
-<img alt="Illustration representing small business growth and financial planning" class="w-full max-w-lg object-contain drop-shadow-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCjcDPzD_uRjT-Su2CChE2BHwRbYZGZeEn0Qb0ENfHutOZ3XvyK3mbUo2PHB5nreV0oe_xTKGGd1IwkwQWLMORaV433f7hdFPMk6aio14KewqIYh-4sA1SmmKrxVwVFL6t5rRl69DGd19OP7b6kTWtZ55x3FfBIkQpPGDYTtON8_M_NfPeNjxdiwlFE5vcKQnHVQZhAFPI3JnPmHEtAyaqHwR5YpO4r9kicw6QLxBC9D6UygwyaFPn">
-</div>
-</section>
-<!-- Advisor Section -->
-<section class="max-w-4xl mx-auto px-container-padding py-section-gap-md relative z-10 -mt-8" id="advisor-section">
-<div class="bg-surface-container-lowest rounded-[14px] p-6 md:p-8 card-border ambient-shadow">
-<div class="mb-6">
-<h2 class="font-headline-lg text-headline-lg text-primary-container mb-2">Tell us about your business</h2>
-<p class="font-body-md text-body-md text-on-surface-variant">Describe what you do, your estimated monthly or yearly income, and where you operate. The more details, the better the guidance.</p>
-</div>
-<div class="space-y-4">
-<div class="relative focus-glow rounded-[14px] overflow-hidden card-border bg-white transition-all duration-200">
-<textarea class="w-full p-4 border-none focus:ring-0 resize-y font-body-md text-body-md text-primary bg-transparent placeholder-outline" id="businessInput" placeholder="E.g., I run a small grocery shop in Mumbai. My monthly sales are around Rs. 80,000. I buy goods locally and sell directly to customers. I don't have any formal registration yet." rows="5"></textarea>
-<div class="absolute bottom-3 right-4 font-label-sm text-label-sm text-outline">
-<span id="charCount" class="">0</span>/500
-                        </div>
-</div>
-<div class="flex flex-wrap gap-2">
-<span class="font-label-sm text-label-sm text-on-surface-variant py-1">Try examples:</span>
-<button class="example-chip px-3 py-1 rounded-full bg-surface-container hover:bg-surface-dim font-label-sm text-label-sm text-primary-container transition-colors duration-200 cursor-pointer card-border" onclick="setExampleText('I am a freelance graphic designer working from home in Bangalore. I make about 12 lakhs a year mostly from clients in the US and UK.')">Freelance Designer</button>
-<button class="example-chip px-3 py-1 rounded-full bg-surface-container hover:bg-surface-dim font-label-sm text-label-sm text-primary-container transition-colors duration-200 cursor-pointer card-border" onclick="setExampleText('We run a small clothing boutique in Delhi. Annual turnover is roughly 45 Lakhs. We buy from local weavers and sell from our shop.')">Clothing Boutique</button>
-<button class="example-chip px-3 py-1 rounded-full bg-surface-container hover:bg-surface-dim font-label-sm text-label-sm text-primary-container transition-colors duration-200 cursor-pointer card-border" onclick="setExampleText('I provide catering services for small events in Pune. Making around 1.5 Lakhs per month. Paying 3 helpers in cash.')">Event Caterer</button>
-</div>
-<div class="pt-4 flex justify-end">
-<button class="bg-secondary text-white px-8 py-4 rounded-[14px] font-label-md hover:bg-on-secondary-container transition-all duration-200 shadow-md flex items-center gap-2 w-full md:w-auto justify-center" id="analyzeBtn" onclick="analyzeBusiness()">
-<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">auto_awesome</span>
-                            Get My Guidance
-                        </button>
-</div>
-</div>
-</div>
-<!-- Loading State -->
-<div class="hidden mt-8 text-center p-8 bg-surface-container-lowest rounded-[14px] card-border ambient-shadow" id="loadingState">
-<div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-secondary border-t-transparent mb-4"></div>
-<p class="font-label-md text-label-md text-primary-container">Analyzing your business details...</p>
-</div>
-<!-- Results Area -->
-<div class="hidden mt-8 space-y-6" id="resultsArea">
-<!-- Profile Summary Card -->
-<div class="bg-surface-container-lowest rounded-[14px] p-6 card-border ambient-shadow">
-<h3 class="font-headline-md text-headline-md text-primary-container border-b border-surface-container-high pb-4 mb-4">Your Business Profile</h3>
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-<div>
-<p class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-1">Estimated Revenue</p>
-<p class="font-body-md text-body-md font-semibold text-primary-container" id="resRevenue">-</p>
-</div>
-<div>
-<p class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-1">Business Type</p>
-<p class="font-body-md text-body-md font-semibold text-primary-container" id="resType">-</p>
-</div>
-<div>
-<p class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-1">Location</p>
-<p class="font-body-md text-body-md font-semibold text-primary-container" id="resState">-</p>
-</div>
-<div>
-<p class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-1">Udyam Eligible</p>
-<p class="font-body-md text-body-md font-semibold text-secondary" id="resUdyam">-</p>
-</div>
-</div>
-</div>
-<!-- GST & Tax Insights -->
-<div class="grid md:grid-cols-2 gap-6">
-<div class="bg-surface-container-lowest rounded-[14px] p-6 card-border ambient-shadow flex flex-col h-full">
-<div class="flex items-center gap-3 mb-4">
-<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary-container">
-<span class="material-symbols-outlined">receipt_long</span>
-</div>
-<h3 class="font-headline-md text-headline-md text-primary-container">GST Status</h3>
-</div>
-<div class="font-body-md text-body-md text-on-surface-variant flex-grow" id="resGst">-</div>
-<div class="mt-4 p-4 bg-surface rounded-lg border border-surface-container-high">
-<p class="font-label-sm text-label-sm text-primary-container font-semibold mb-1">Key Flags Identified</p>
-<ul class="font-body-sm text-body-sm text-on-surface-variant list-disc pl-4 space-y-1" id="resFlags"></ul>
-</div>
-</div>
-<div class="bg-surface-container-lowest rounded-[14px] p-6 card-border ambient-shadow flex flex-col h-full">
-<div class="flex items-center gap-3 mb-4">
-<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary-container">
-<span class="material-symbols-outlined">account_balance</span>
-</div>
-<h3 class="font-headline-md text-headline-md text-primary-container">Income Tax Estimate</h3>
-</div>
-<div class="font-body-md text-body-md text-on-surface-variant flex-grow" id="resTax">-</div>
-</div>
-</div>
-<!-- Recommended Next Steps -->
-<div class="bg-surface-container-lowest rounded-[14px] p-6 card-border ambient-shadow">
-<h3 class="font-headline-md text-headline-md text-primary-container mb-4">Recommended Next Steps</h3>
-<ul class="space-y-3" id="resBenefits">
-<!-- Populated by JS -->
-</ul>
-</div>
-<div class="flex justify-center mt-6">
+<main class="container" id="top">
 
-</div>
-</div>
-</section>
-<!-- Features Section -->
-<section class="max-w-7xl mx-auto px-container-padding py-section-gap-lg">
-<div class="text-center mb-12">
-<h2 class="font-headline-lg text-headline-lg text-primary-container mb-4">What you will get</h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Comprehensive guidance tailored to your specific business profile.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-<!-- Feature 1 -->
-<div class="bg-surface-container-lowest p-6 rounded-[14px] card-border ambient-shadow hover:-translate-y-1 transition-transform duration-300">
-<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-secondary mb-4">
-<span class="material-symbols-outlined" style="font-variation-settings: &quot;wght&quot; 300;">app_registration</span>
-</div>
-<h3 class="font-label-md text-label-md text-primary-container mb-2">Registration</h3>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Know exactly which licenses and registrations you need.</p>
-</div>
-<!-- Feature 2 -->
-<div class="bg-surface-container-lowest p-6 rounded-[14px] card-border ambient-shadow hover:-translate-y-1 transition-transform duration-300">
-<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-secondary mb-4">
-<span class="material-symbols-outlined" style="font-variation-settings: &quot;wght&quot; 300;">calculate</span>
-</div>
-<h3 class="font-label-md text-label-md text-primary-container mb-2">Taxes</h3>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Understand your GST and income tax obligations simply.</p>
-</div>
-<!-- Feature 3 -->
-<div class="bg-surface-container-lowest p-6 rounded-[14px] card-border ambient-shadow hover:-translate-y-1 transition-transform duration-300">
-<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-secondary mb-4">
-<span class="material-symbols-outlined" style="font-variation-settings: &quot;wght&quot; 300;">redeem</span>
-</div>
-<h3 class="font-label-md text-label-md text-primary-container mb-2">Benefits</h3>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Discover government schemes you qualify for.</p>
-</div>
-<!-- Feature 4 -->
-<div class="bg-surface-container-lowest p-6 rounded-[14px] card-border ambient-shadow hover:-translate-y-1 transition-transform duration-300">
-<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-secondary mb-4">
-<span class="material-symbols-outlined" style="font-variation-settings: &quot;wght&quot; 300;">verified</span>
-</div>
-<h3 class="font-label-md text-label-md text-primary-container mb-2">Compliance</h3>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Stay on the right side of the law with clear deadlines.</p>
-</div>
-<!-- Feature 5 -->
-<div class="bg-surface-container-lowest p-6 rounded-[14px] card-border ambient-shadow hover:-translate-y-1 transition-transform duration-300">
-<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-secondary mb-4">
-<span class="material-symbols-outlined" style="font-variation-settings: &quot;wght&quot; 300;">savings</span>
-</div>
-<h3 class="font-label-md text-label-md text-primary-container mb-2">Ways to Save</h3>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Identify legitimate ways to minimize your tax burden.</p>
-</div>
-</div>
-</section>
-<!-- Process Section -->
-<section id="how-it-works" class="bg-surface-container-low border-y border-surface-container-high py-section-gap-lg"></section>
-<div class="max-w-7xl mx-auto px-container-padding">
-<div class="text-center mb-16">
-<h2 class="font-headline-lg text-headline-lg text-primary-container mb-4">How it works</h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">A simple, four-step process to financial clarity.</p>
-</div>
-<div class="relative">
-<!-- Connecting Line (Desktop) -->
-<div class="hidden md:block absolute top-8 left-[10%] right-[10%] h-[2px] bg-outline-variant z-0"></div>
-<div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
-<!-- Step 1 -->
-<div class="flex flex-col items-center text-center">
-<div class="w-16 h-16 rounded-full bg-primary-container text-white flex items-center justify-center font-headline-md text-headline-md mb-6 shadow-md border-4 border-surface-container-low">1</div>
-<h3 class="font-label-md text-label-md text-primary-container mb-2">Tell us about your business</h3>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Use plain language to describe your operations.</p>
-</div>
-<!-- Step 2 -->
-<div class="flex flex-col items-center text-center">
-<div class="w-16 h-16 rounded-full bg-surface-container-lowest text-primary-container flex items-center justify-center font-headline-md text-headline-md mb-6 card-border ambient-shadow border-4 border-surface-container-low">2</div>
-<h3 class="font-label-md text-label-md text-primary-container mb-2">We analyze it</h3>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Our smart system identifies your requirements.</p>
-</div>
-<!-- Step 3 -->
-<div class="flex flex-col items-center text-center">
-<div class="w-16 h-16 rounded-full bg-surface-container-lowest text-primary-container flex items-center justify-center font-headline-md text-headline-md mb-6 card-border ambient-shadow border-4 border-surface-container-low">3</div>
-<h3 class="font-label-md text-label-md text-primary-container mb-2">Get clear answers</h3>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Review a simple, jargon-free guidance report.</p>
-</div>
-<!-- Step 4 -->
-<div class="flex flex-col items-center text-center">
-<div class="w-16 h-16 rounded-full bg-secondary text-white flex items-center justify-center font-headline-md text-headline-md mb-6 shadow-md border-4 border-surface-container-low">4</div>
-<h3 class="font-label-md text-label-md text-primary-container mb-2">Grow with confidence</h3>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Implement the steps and focus on expansion.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Trust Section -->
-<section id="why-go-formal" class="max-w-7xl mx-auto px-container-padding py-section-gap-lg"></section>
-<div class="bg-[#FFFDF5] rounded-[24px] p-8 md:p-12 border border-[#EBE4C9] shadow-sm">
-<div class="flex flex-col lg:flex-row gap-12 items-center">
-<div class="lg:w-1/3">
-<h2 class="font-headline-lg text-headline-lg text-[#5A4500] mb-4">Why go formal?</h2>
-<p class="font-body-md text-body-md text-[#755B00]">Operating in the formal economy opens doors to growth that informal businesses simply cannot access.</p>
-</div>
-<div class="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-6">
-<div class="flex gap-4">
-<div class="mt-1 text-[#C9A227]">
-<span class="material-symbols-outlined">account_balance_wallet</span>
-</div>
-<div>
-<h3 class="font-label-md text-label-md text-[#5A4500] mb-1">Access to Loans</h3>
-<p class="font-body-sm text-body-sm text-[#755B00]">Banks require formal documentation for business credit.</p>
-</div>
-</div>
-<div class="flex gap-4">
-<div class="mt-1 text-[#C9A227]">
-<span class="material-symbols-outlined">assured_workload</span>
-</div>
-<div>
-<h3 class="font-label-md text-label-md text-[#5A4500] mb-1">Government Schemes</h3>
-<p class="font-body-sm text-body-sm text-[#755B00]">Qualify for subsidies and support programs.</p>
-</div>
-</div>
-<div class="flex gap-4">
-<div class="mt-1 text-[#C9A227]">
-<span class="material-symbols-outlined">handshake</span>
-</div>
-<div>
-<h3 class="font-label-md text-label-md text-[#5A4500] mb-1">Customer Trust</h3>
-<p class="font-body-sm text-body-sm text-[#755B00]">Larger clients prefer dealing with registered entities.</p>
-</div>
-</div>
-<div class="flex gap-4">
-<div class="mt-1 text-[#C9A227]">
-<span class="material-symbols-outlined">trending_up</span>
-</div>
-<div>
-<h3 class="font-label-md text-label-md text-[#5A4500] mb-1">Growth with Fewer Worries</h3>
-<p class="font-body-sm text-body-sm text-[#755B00]">Operate legally without fear of sudden penalties.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="bg-surface-container-highest dark:bg-inverse-surface full-width bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant flat no shadows w-full py-section-gap-md px-container-padding flex flex-col md:flex-row justify-between items-start gap-8 mt-12">
-<div class="flex flex-col gap-4 max-w-sm">
-<div class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim">
-                Tax-Simplicity Advisor
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <h1>Understand taxes.<br><span class="accent">Grow your business.</span></h1>
+        <p class="lede">Describe your business in simple words and we'll tell you about registration, taxes, and benefits you can unlock.</p>
+        <div class="check-list">
+          <div class="check-item">
+            <span class="dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6L4.5 8.5L10 3" stroke="#167D68" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Plain language
+          </div>
+          <div class="check-item">
+            <span class="dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6L4.5 8.5L10 3" stroke="#167D68" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Simple guidance
+          </div>
+          <div class="check-item">
+            <span class="dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6L4.5 8.5L10 3" stroke="#167D68" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Helpful benefits
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <svg width="100%" height="100%" viewBox="0 0 420 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- ground -->
+          <ellipse cx="210" cy="322" rx="190" ry="14" fill="#EFE3BE" opacity="0.6"/>
+          <!-- shop building -->
+          <rect x="70" y="150" width="220" height="150" rx="6" fill="#FFFFFF" stroke="#0B1F3A" stroke-width="2"/>
+          <!-- awning -->
+          <path d="M60 150 L 300 150 L 285 115 L 75 115 Z" fill="#167D68"/>
+          <path d="M75 115 L95 150 M95 115 L115 150 M115 115 L135 150 M135 115 L155 150 M155 115 L175 150 M175 115 L195 150 M195 115 L215 150 M215 115 L235 150 M235 115 L255 150 M255 115 L275 150" stroke="#F7F9FC" stroke-width="10"/>
+          <!-- door -->
+          <rect x="150" y="220" width="60" height="80" rx="3" fill="#163B65"/>
+          <circle cx="196" cy="262" r="2.5" fill="#C9A227"/>
+          <!-- shelves -->
+          <rect x="90" y="175" width="45" height="35" rx="3" fill="#DCEEE9" stroke="#167D68" stroke-width="1.4"/>
+          <rect x="90" y="215" width="45" height="35" rx="3" fill="#F4E8C8" stroke="#C9A227" stroke-width="1.4"/>
+          <!-- signboard -->
+          <rect x="150" y="128" width="60" height="16" rx="3" fill="#0B1F3A"/>
+          <!-- shopkeeper -->
+          <circle cx="255" cy="215" r="20" fill="#E7B98C"/>
+          <path d="M240 215 Q 255 205 270 215" stroke="#3B2A1E" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <path d="M235 245 Q 255 260 275 245 L 278 300 L 232 300 Z" fill="#F4E8C8" stroke="#C9A227" stroke-width="1.4"/>
+          <rect x="228" y="290" width="12" height="30" rx="4" fill="#163B65"/>
+          <rect x="270" y="290" width="12" height="30" rx="4" fill="#163B65"/>
+          <!-- plant -->
+          <rect x="315" y="270" width="26" height="30" rx="4" fill="#163B65"/>
+          <circle cx="328" cy="255" r="18" fill="#167D68" opacity="0.85"/>
+          <circle cx="315" cy="245" r="12" fill="#167D68" opacity="0.7"/>
+          <circle cx="342" cy="248" r="12" fill="#167D68" opacity="0.7"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- INPUT CARD -->
+    <div class="advisor-card">
+      <div class="advisor-card-head">
+        <div class="advisor-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 4H20V16H8L4 20V4Z" stroke="#F7F9FC" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <h3>Tell us about your business</h3>
+          <p>Write in simple words. For example: "I run a small grocery shop in my area."</p>
+        </div>
+      </div>
+
+      <textarea id="bizInput" maxlength="500" placeholder="Type or write about your business here..."></textarea>
+
+      <div class="card-footer-row">
+        <span class="char-count"><span id="charCount">0</span> / 500</span>
+        <button class="btn-primary" id="analyzeBtn" onclick="analyzeBusiness()">
+          Get My Guidance
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="example-row">
+        <span class="example-chip" onclick="fillExample(0)">🥕 Vegetable cart, Rajasthan</span>
+        <span class="example-chip" onclick="fillExample(1)">🎨 Freelance designer, Bangalore</span>
+        <span class="example-chip" onclick="fillExample(2)">🧵 Tailoring shop, Delhi (woman-owned)</span>
+        <span class="example-chip" onclick="fillExample(3)">🔧 Hardware store, Maharashtra</span>
+      </div>
+
+      <!-- RESULTS -->
+      <div id="results"></div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU WILL GET -->
+  <section class="feature-section" id="benefits">
+    <h2 class="section-title">What you will get</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#E4ECF6;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 3H14L18 7V21H6V3Z" stroke="#163B65" stroke-width="1.7"/><path d="M9 12H15M9 16H15" stroke="#163B65" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </div>
+        <h4>Registration</h4>
+        <p>Know which registration or license applies to your business.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:var(--teal-soft);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2V22M17 6.5C17 4.5 14.7 3 12 3C9.3 3 7 4.5 7 6.5C7 8.5 9.3 9.5 12 10C14.7 10.5 17 11.5 17 13.5C17 15.5 14.7 17 12 17C9.3 17 7 15.5 7 13.5" stroke="#167D68" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </div>
+        <h4>Taxes</h4>
+        <p>Understand what taxes you may need to pay.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:var(--gold-soft);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="9" width="18" height="12" rx="1.5" stroke="#8A6D0F" stroke-width="1.7"/><path d="M3 9H21M12 9V21M8 9C6 9 5 7.5 5 6C5 4.5 6.2 3.5 7.5 3.5C9.8 3.5 11 6 12 9C13 6 14.2 3.5 16.5 3.5C17.8 3.5 19 4.5 19 6C19 7.5 18 9 16 9" stroke="#8A6D0F" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </div>
+        <h4>Benefits</h4>
+        <p>See government benefits and schemes you can get.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#F0E6D2;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 3H15M9 3C7 3 6 4.5 6 6.5V20C6 20.5 6.5 21 7 21H17C17.5 21 18 20.5 18 20V6.5C18 4.5 17 3 15 3M4 9L6 8M20 9L18 8" stroke="#8A6D0F" stroke-width="1.7" stroke-linecap="round"/><path d="M9 12L11 14L15 10" stroke="#8A6D0F" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h4>Compliance</h4>
+        <p>Know simple steps to stay compliant and avoid problems.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#FBE4E4;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.5 2 6 4.7 6 8C6 10.5 7.5 12 8.5 13.2C9 13.8 9 14.5 9 15H15C15 14.5 15 13.8 15.5 13.2C16.5 12 18 10.5 18 8C18 4.7 15.5 2 12 2Z" stroke="#B0453D" stroke-width="1.7"/><path d="M9.5 18H14.5M10.5 21H13.5" stroke="#B0453D" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </div>
+        <h4>Ways to Save</h4>
+        <p>Find smart ways to save money legally.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <h2 class="section-title">How it works</h2>
+      <div class="steps-row">
+        <div class="step">
+          <div class="step-icon-wrap">
+            <div class="step-icon" style="background:#E4ECF6;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#163B65" stroke-width="1.7"/><path d="M4 20C4 16 7.5 14 12 14C16.5 14 20 16 20 20" stroke="#163B65" stroke-width="1.7" stroke-linecap="round"/></svg>
             </div>
-<p class="font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface">
-                © 2024 Informal Economy Tax-Simplicity Advisor. This tool provides general guidance and is not a substitute for professional legal or financial advice.
-            </p>
-</div>
+            <div class="step-num">1</div>
+          </div>
+          <h5>Tell us about your business</h5>
+          <p>Write a few simple lines about what you do.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-icon-wrap">
+            <div class="step-icon" style="background:var(--teal-soft);">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="5" y="3" width="14" height="18" rx="2" stroke="#167D68" stroke-width="1.7"/><path d="M9 8H15M9 12H15M9 16H12" stroke="#167D68" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </div>
+            <div class="step-num">2</div>
+          </div>
+          <h5>We analyze it</h5>
+          <p>Our tool finds the right tax and legal requirements.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-icon-wrap">
+            <div class="step-icon" style="background:var(--gold-soft);">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#8A6D0F" stroke-width="1.7"/><path d="M12 7V12L15.5 14" stroke="#8A6D0F" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </div>
+            <div class="step-num">3</div>
+          </div>
+          <h5>Get clear answers</h5>
+          <p>See registrations, taxes, compliance and benefits.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-icon-wrap">
+            <div class="step-icon" style="background:#F0E6D2;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 18L9 12L13 15L20 6" stroke="#8A6D0F" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 6H20V11" stroke="#8A6D0F" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-num">4</div>
+          </div>
+          <h5>Grow with confidence</h5>
+          <p>Follow the guidance and unlock benefits for your business.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<div class="flex flex-col gap-2">
+  <!-- WHY GO FORMAL -->
+  <section class="why-formal">
+    <div class="container">
+      <div class="why-inner">
+        <div class="why-title">
+          <div class="shield">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L20 5V11C20 16 16.5 20.5 12 22C7.5 20.5 4 16 4 11V5L12 2Z" stroke="#fff" stroke-width="1.7"/><path d="M9 12L11 14L15.5 9" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h4>Why go formal?</h4>
+        </div>
+        <div class="why-points">
+          <div class="why-point">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 21V9L12 3L20 9V21H14V14H10V21H4Z" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            <span>Easy access to loans and credit</span>
+          </div>
+          <div class="why-point">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="8" cy="8" r="3" stroke-width="1.7"/><circle cx="17" cy="9" r="2.5" stroke-width="1.7"/><path d="M2 20C2 16.5 4.7 15 8 15C11.3 15 14 16.5 14 20" stroke-width="1.7" stroke-linecap="round"/><path d="M14 20C14 17.5 15.7 16.5 17.5 16.5C19.8 16.5 22 17.7 22 20" stroke-width="1.7" stroke-linecap="round"/></svg>
+            <span>Eligible for government schemes</span>
+          </div>
+          <div class="why-point">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 13L4 9L2 11L8 17L14 11" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 6L16 12L14 10" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Build trust with customers</span>
+          </div>
+          <div class="why-point">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 20L9 14L13 18L21 8" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 8H21V14" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Grow your business with fewer worries</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <footer>
+    <div class="foot-note">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 11V16M12 8V8.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <span>This tool gives general guidance based on the information you provide. For specific advice, please consult a tax professional.</span>
+    </div>
+  </footer>
 
+</main>
 
-</div>
-</footer>
-<!-- Logic Script (Preserved exactly as requested) -->
 <script>
-        // Character counter
-        const inputField = document.getElementById('businessInput');
-        const charCount = document.getElementById('charCount');
-        
-        inputField.addEventListener('input', function() {
-            charCount.textContent = this.value.length;
-        });
+const EXAMPLES = [
+  "I run a small vegetable cart in Rajasthan, I earn around 15,000 rupees a month.",
+  "I am a freelance graphic designer working from Bangalore, Karnataka, I make about 8 lakh a year.",
+  "I have a small tailoring shop in Delhi, I am a woman entrepreneur, monthly income is roughly 35000 rupees.",
+  "I run a hardware store in Maharashtra, annual turnover is about 1.5 crore rupees."
+];
 
-        // Helper to set example text
-        function setExampleText(text) {
-            inputField.value = text;
-            charCount.textContent = text.length;
-            inputField.focus();
-        }
+function fillExample(i) {
+  const ta = document.getElementById('bizInput');
+  ta.value = EXAMPLES[i];
+  document.getElementById('charCount').textContent = ta.value.length;
+}
 
-        function fmtINR(n) {
-            return "₹" + Math.round(n).toLocaleString('en-IN');
-        }
+function fmtINR(n) {
+  return "₹" + Math.round(n).toLocaleString('en-IN');
+}
 
-        async function analyzeBusiness() {
-            const input = document.getElementById('businessInput').value.trim();
-            const loadingArea = document.getElementById('loadingState');
-            const resultsArea = document.getElementById('resultsArea');
+/* ============================================================
+   ANALYZE — calls the Flask backend, which runs the real Python
+   extractor.py + rules_engine.py logic. No calculation happens
+   in JavaScript; this file only renders whatever the server returns.
+   ============================================================ */
+async function analyzeBusiness() {
+  const text = document.getElementById('bizInput').value.trim();
+  if (!text) {
+    document.getElementById('bizInput').focus();
+    return;
+  }
 
-            if (input.length < 10) {
-                alert("Please provide more details about your business.");
-                return;
-            }
+  const btn = document.getElementById('analyzeBtn');
+  const originalLabel = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = 'Analyzing…';
 
-            resultsArea.classList.add('hidden');
-            loadingArea.classList.remove('hidden');
+  try {
+    const res = await fetch('/api/analyze', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text })
+    });
 
-            try {
-                const res = await fetch('/api/analyze', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ text: input })
-                });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || 'Something went wrong analyzing your business.');
+    }
 
-                if (!res.ok) {
-                    const err = await res.json().catch(() => ({}));
-                    throw new Error(err.error || 'Something went wrong.');
-                }
+    const data = await res.json();
+    renderResults(data);
+  } catch (e) {
+    document.getElementById('results').innerHTML = `
+      <div class="result-block" style="border-color:#F0B9B9;background:#FBE7E7;">
+        <h4>Something went wrong</h4>
+        <p class="note">${e.message}. Make sure the Flask server (app.py) is running.</p>
+      </div>`;
+    document.getElementById('results').classList.add('show');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = originalLabel;
+  }
+}
 
-                const data = await res.json();
-                renderResults(data);
+function renderResults(data) {
+  const profile = data.profile;
+  const gst = data.gst;
+  const presumptive = data.presumptiveTax;
+  const udyam = data.udyamTier;
+  const benefits = data.benefits || [];
 
-                loadingArea.classList.add('hidden');
-                resultsArea.classList.remove('hidden');
-                resultsArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            } catch (e) {
-                loadingArea.classList.add('hidden');
-                alert("Couldn't analyze your business: " + e.message + "\n\nMake sure the Flask server (app.py) is running.");
-            }
-        }
+  let flagsHtml = '';
+  if (profile.isWoman) flagsHtml += `<span class="flag-pill">👩 Woman-owned</span>`;
+  if (profile.isScSt) flagsHtml += `<span class="flag-pill">🤝 SC/ST entrepreneur</span>`;
+  if (profile.isNew) flagsHtml += `<span class="flag-pill">🌱 New business</span>`;
 
-        // data comes straight from Flask's /api/analyze — real extractor.py + rules_engine.py output
-        function renderResults(data) {
-            const profile = data.profile;
-            const gst = data.gst;
-            const tax = data.presumptiveTax;
-            const udyam = data.udyamTier;
-            const benefits = data.benefits || [];
+  let gstHtml = '';
+  if (gst) {
+    gstHtml = `
+      <div class="result-block">
+        <h4>🧾 GST Registration</h4>
+        <span class="status-pill ${gst.required ? 'required' : 'not-required'}">${gst.required ? 'Registration Required' : 'Not Required Yet'}</span>
+        <p>${gst.required
+          ? `Your revenue exceeds the ${fmtINR(gst.threshold)} threshold for your category, so GST registration is required.`
+          : `Threshold for your category is ${fmtINR(gst.threshold)}/year — you're currently below it.`}</p>
+        ${gst.is_special_state ? `<p class="note">Your state qualifies for the lower special-category threshold.</p>` : ''}
+      </div>`;
+  }
 
-            document.getElementById('resRevenue').textContent =
-                profile.revenue !== null ? fmtINR(profile.revenue) + "/year" : "Not detected";
-            document.getElementById('resType').textContent =
-                profile.type ? profile.type.charAt(0).toUpperCase() + profile.type.slice(1) : "-";
-            document.getElementById('resState').textContent =
-                profile.state ? profile.state.charAt(0).toUpperCase() + profile.state.slice(1) : "Not detected";
-            document.getElementById('resUdyam').textContent = udyam || "N/A";
+  let taxHtml = '';
+  if (presumptive) {
+    if (presumptive.applicable) {
+      const pct = presumptive.deemed_profit > 0 ? Math.min(100, (presumptive.estimated_tax / presumptive.deemed_profit) * 100) : 0;
+      taxHtml = `
+        <div class="result-block">
+          <h4>💰 Estimated Tax — Section ${presumptive.section}</h4>
+          <p>Deemed taxable profit: <strong>${fmtINR(presumptive.deemed_profit)}</strong></p>
+          <div class="tax-gauge-wrap">
+            <div class="tax-figure"><span class="cur">₹</span>${presumptive.estimated_tax.toLocaleString('en-IN')}</div>
+            <div class="gauge-bar-track"><div class="gauge-bar-fill" style="width:${pct}%"></div></div>
+          </div>
+          <p class="note">Under presumptive taxation, you don't need to maintain detailed books of accounts — tax is calculated on a fixed percentage of turnover.${presumptive.estimated_tax === 0 ? ' Your deemed profit falls under the ₹7,00,000 rebate limit (Section 87A), so no tax is owed.' : ''}</p>
+        </div>`;
+    } else {
+      taxHtml = `
+        <div class="result-block">
+          <h4>💰 Estimated Tax</h4>
+          <p class="note">${presumptive.reason} — standard tax filing rules apply instead of presumptive taxation.</p>
+        </div>`;
+    }
+  }
 
-            // GST status
-            let gstEl = document.getElementById('resGst');
-            if (gst) {
-                gstEl.textContent = gst.required
-                    ? `Registration required — revenue exceeds the ${fmtINR(gst.threshold)} threshold for your category.`
-                    : `Not required yet — threshold for your category is ${fmtINR(gst.threshold)}/year.`;
-                gstEl.classList.toggle("text-error", gst.required);
-                gstEl.classList.toggle("font-bold", gst.required);
-            } else {
-                gstEl.textContent = "Add a revenue figure (e.g. '15,000 a month') for a GST status.";
-                gstEl.classList.remove("text-error", "font-bold");
-            }
+  let udyamHtml = udyam ? `
+    <div class="result-block">
+      <h4>🏭 MSME (Udyam) Classification</h4>
+      <p>Based on turnover, your business falls under the <strong>${udyam}</strong> enterprise tier.</p>
+    </div>` : '';
 
-            // Key flags
-            let flagsUl = document.getElementById('resFlags');
-            flagsUl.innerHTML = "";
-            const flags = [];
-            if (profile.isWoman) flags.push("Woman-owned business");
-            if (profile.isScSt) flags.push("SC/ST entrepreneur");
-            if (profile.isNew) flags.push("New business");
-            if (gst && gst.is_special_state) flags.push("Special-category state (lower GST threshold)");
-            if (flags.length === 0) flags.push("No special flags detected");
-            flags.forEach(f => {
-                let li = document.createElement('li');
-                li.textContent = f;
-                flagsUl.appendChild(li);
-            });
+  let benefitsHtml = `
+    <div class="result-block">
+      <h4>🎁 Benefits You Could Unlock</h4>
+      <div class="benefit-list">
+        ${benefits.length === 0
+          ? `<p class="note">No specific benefits matched — try adding more detail (revenue, whether it's a new business, etc).</p>`
+          : benefits.map((b, i) => `
+            <div class="benefit-item" id="ben-${i}">
+              <div class="benefit-summary" onclick="document.getElementById('ben-${i}').classList.toggle('open')">
+                <span class="check-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6L4.5 8.5L10 3" stroke="#167D68" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                ${b.name}
+              </div>
+              <div class="benefit-detail">${b.description}</div>
+            </div>`).join('')}
+      </div>
+    </div>`;
 
-            // Income tax estimate
-            let taxEl = document.getElementById('resTax');
-            if (tax && tax.applicable) {
-                taxEl.textContent = `Under Section ${tax.section}, deemed taxable profit is ${fmtINR(tax.deemed_profit)}. Estimated tax: ${fmtINR(tax.estimated_tax)}` +
-                    (tax.estimated_tax === 0 ? " (below the ₹7,00,000 rebate limit, so no tax is owed)." : ".");
-            } else if (tax) {
-                taxEl.textContent = tax.reason || "Standard tax filing rules apply.";
-            } else {
-                taxEl.textContent = "Add a revenue figure for a tax estimate.";
-            }
+  const revenueWarning = profile.revenue === null
+    ? `<div class="result-block" style="border-color:#EAD9A0;background:#FFFCF3;"><p class="note">Couldn't detect a revenue figure — try including a number like "15,000 per month" or "5 lakh a year" for a full tax and GST report.</p></div>`
+    : '';
 
-            // Benefits
-            let benUl = document.getElementById('resBenefits');
-            benUl.innerHTML = "";
-            if (benefits.length === 0) {
-                let li = document.createElement('li');
-                li.className = "flex gap-3 items-start p-3 bg-surface rounded-lg border border-surface-container-high";
-                li.innerHTML = `<span class="material-symbols-outlined text-secondary mt-0.5">info</span> <span class="font-body-sm text-body-sm text-on-surface-variant">No specific benefits matched — add more detail for better matches.</span>`;
-                benUl.appendChild(li);
-            } else {
-                benefits.forEach(b => {
-                    let li = document.createElement('li');
-                    li.className = "flex gap-3 items-start p-3 bg-surface rounded-lg border border-surface-container-high";
-                    li.innerHTML = `<span class="material-symbols-outlined text-secondary mt-0.5">check_circle</span> <span class="font-body-sm text-body-sm text-on-surface-variant"><strong>${b.name}</strong> — ${b.description}</span>`;
-                    benUl.appendChild(li);
-                });
-            }
-        }
+  document.getElementById('results').innerHTML = `
+    <div class="results-header">
+      <h3>Your Guidance Report</h3>
+      <span class="badge">Generated</span>
+    </div>
+    <div class="metrics-row">
+      <div class="metric-box">
+        <div class="label">Est. Annual Revenue</div>
+        <div class="value">${profile.revenue !== null ? fmtINR(profile.revenue) : '—'}</div>
+      </div>
+      <div class="metric-box">
+        <div class="label">Business Type</div>
+        <div class="value" style="text-transform:capitalize;">${profile.type}</div>
+      </div>
+      <div class="metric-box">
+        <div class="label">State</div>
+        <div class="value" style="text-transform:capitalize;">${profile.state || 'Not detected'}</div>
+      </div>
+    </div>
+    ${flagsHtml ? `<div class="flag-row">${flagsHtml}</div>` : ''}
+    ${revenueWarning}
+    ${gstHtml}
+    ${taxHtml}
+    ${udyamHtml}
+    ${benefitsHtml}
+    <p class="disclaimer-note">⚠️ This is a prototype using simplified FY 2024–25 tax rules. Not a substitute for professional tax or legal advice.</p>
+  `;
 
-        function toggleCard(headerEl) {
-            // Functionality not strictly needed in this new design layout as results are displayed differently, 
-            // but preserved to satisfy the "keep all existing Javascript logic" requirement exactly.
-            let content = headerEl.nextElementSibling;
-            let icon = headerEl.querySelector('.material-symbols-outlined');
-            if (content.classList.contains('hidden')) {
-                content.classList.remove('hidden');
-                icon.textContent = "expand_less";
-            } else {
-                content.classList.add('hidden');
-                icon.textContent = "expand_more";
-            }
-        }
-    </script>
+  const resultsEl = document.getElementById('results');
+  resultsEl.classList.add('show');
+  resultsEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+document.getElementById('bizInput').addEventListener('input', (e) => {
+  document.getElementById('charCount').textContent = e.target.value.length;
+});
+
+document.getElementById('bizInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) analyzeBusiness();
+});
+</script>
 
 
-</body></html>
+</body>
+</html>
