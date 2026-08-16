@@ -1,0 +1,557 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Tax-Simplicity Advisor</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&amp;family=Inter:wght@300..700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "secondary": "#006b58",
+                            "surface-container": "#e9eef6",
+                            "surface-dim": "#d5dae2",
+                            "on-secondary-container": "#00725e",
+                            "outline": "#75777e",
+                            "background": "#f7f9ff",
+                            "inverse-primary": "#b5c7ea",
+                            "on-secondary-fixed": "#002019",
+                            "on-surface": "#171c22",
+                            "on-primary-fixed-variant": "#364764",
+                            "on-error-container": "#93000a",
+                            "tertiary-fixed-dim": "#ecc246",
+                            "tertiary-fixed": "#ffe08e",
+                            "surface-bright": "#f7f9ff",
+                            "primary-container": "#0b1f3a",
+                            "error-container": "#ffdad6",
+                            "on-primary-fixed": "#071c36",
+                            "on-tertiary-fixed": "#241a00",
+                            "on-tertiary-fixed-variant": "#584400",
+                            "surface-variant": "#dee3eb",
+                            "surface-tint": "#4d5f7d",
+                            "surface-container-lowest": "#ffffff",
+                            "surface-container-highest": "#dee3eb",
+                            "on-primary": "#ffffff",
+                            "outline-variant": "#c4c6ce",
+                            "on-surface-variant": "#44474d",
+                            "error": "#ba1a1a",
+                            "surface-container-low": "#eff4fc",
+                            "surface-container-high": "#e3e8f0",
+                            "primary-fixed": "#d6e3ff",
+                            "inverse-surface": "#2b3137",
+                            "tertiary": "#755b00",
+                            "secondary-fixed": "#99f4da",
+                            "on-primary-container": "#7587a7",
+                            "secondary-fixed-dim": "#7dd7be",
+                            "inverse-on-surface": "#ecf1f9",
+                            "on-tertiary": "#ffffff",
+                            "on-tertiary-container": "#503d00",
+                            "on-background": "#171c22",
+                            "on-secondary-fixed-variant": "#005142",
+                            "on-error": "#ffffff",
+                            "primary": "#000615",
+                            "tertiary-container": "#cea72c",
+                            "on-secondary": "#ffffff",
+                            "surface": "#f7f9ff",
+                            "secondary-container": "#99f4da",
+                            "primary-fixed-dim": "#b5c7ea"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "gutter": "16px",
+                            "section-gap-lg": "64px",
+                            "container-padding": "24px",
+                            "unit": "8px",
+                            "section-gap-md": "32px"
+                    },
+                    "fontFamily": {
+                            "headline-md": ["Fraunces"],
+                            "headline-lg": ["Fraunces"],
+                            "body-md": ["Inter"],
+                            "body-lg": ["Inter"],
+                            "body-sm": ["Inter"],
+                            "label-md": ["Inter"],
+                            "label-sm": ["Inter"],
+                            "display-lg": ["Fraunces"],
+                            "display-lg-mobile": ["Fraunces"]
+                    },
+                    "fontSize": {
+                            "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                            "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                            "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                            "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                            "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                            "label-sm": ["12px", {"lineHeight": "1", "fontWeight": "500"}],
+                            "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                            "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ambient-shadow {
+            box-shadow: 0 4px 20px rgba(11, 31, 58, 0.06);
+        }
+        .card-border {
+            border: 1px solid #E3E8F0;
+        }
+        .focus-glow:focus-within {
+            border-color: #167D68;
+            box-shadow: 0 0 0 2px rgba(22, 125, 104, 0.2);
+            outline: none;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased selection:bg-secondary selection:text-white">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-primary-container docked full-width top-0 bg-surface dark:bg-primary-container border-b border-outline-variant dark:border-outline shadow-sm sticky top-0 z-50 flex justify-between items-center w-full px-container-padding py-4 max-w-7xl mx-auto">
+<div class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed">
+            Tax-Simplicity Advisor
+        </div>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="font-label-md text-label-md text-secondary dark:text-secondary-fixed border-b-2 border-secondary dark:border-secondary-fixed pb-1 hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 opacity-80 transition-opacity" href="/">Home</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200" href="/#how-it-works">How it Works</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200" href="/tax-guide">Tax Guide</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200" href="/resources">Resources</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200" href="/about">About</a>
+</nav>
+
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<main class="w-full">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-container-padding py-section-gap-lg flex flex-col-reverse md:flex-row items-center gap-12">
+<div class="flex-1 space-y-6">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary-container">
+                    Understand taxes. Grow your business.
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                    Navigating taxes and formalizing your business shouldn't be overwhelming. Get clear, personalized guidance to help you focus on what you do best—running your business.
+                </p>
+<div class="flex gap-4 pt-4">
+
+</div>
+</div>
+<div class="flex-1 w-full flex justify-center">
+<img alt="Illustration representing small business growth and financial planning" class="w-full max-w-lg object-contain drop-shadow-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCjcDPzD_uRjT-Su2CChE2BHwRbYZGZeEn0Qb0ENfHutOZ3XvyK3mbUo2PHB5nreV0oe_xTKGGd1IwkwQWLMORaV433f7hdFPMk6aio14KewqIYh-4sA1SmmKrxVwVFL6t5rRl69DGd19OP7b6kTWtZ55x3FfBIkQpPGDYTtON8_M_NfPeNjxdiwlFE5vcKQnHVQZhAFPI3JnPmHEtAyaqHwR5YpO4r9kicw6QLxBC9D6UygwyaFPn">
+</div>
+</section>
+<!-- Advisor Section -->
+<section class="max-w-4xl mx-auto px-container-padding py-section-gap-md relative z-10 -mt-8" id="advisor-section">
+<div class="bg-surface-container-lowest rounded-[14px] p-6 md:p-8 card-border ambient-shadow">
+<div class="mb-6">
+<h2 class="font-headline-lg text-headline-lg text-primary-container mb-2">Tell us about your business</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Describe what you do, your estimated monthly or yearly income, and where you operate. The more details, the better the guidance.</p>
+</div>
+<div class="space-y-4">
+<div class="relative focus-glow rounded-[14px] overflow-hidden card-border bg-white transition-all duration-200">
+<textarea class="w-full p-4 border-none focus:ring-0 resize-y font-body-md text-body-md text-primary bg-transparent placeholder-outline" id="businessInput" placeholder="E.g., I run a small grocery shop in Mumbai. My monthly sales are around Rs. 80,000. I buy goods locally and sell directly to customers. I don't have any formal registration yet." rows="5"></textarea>
+<div class="absolute bottom-3 right-4 font-label-sm text-label-sm text-outline">
+<span id="charCount" class="">0</span>/500
+                        </div>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant py-1">Try examples:</span>
+<button class="example-chip px-3 py-1 rounded-full bg-surface-container hover:bg-surface-dim font-label-sm text-label-sm text-primary-container transition-colors duration-200 cursor-pointer card-border" onclick="setExampleText('I am a freelance graphic designer working from home in Bangalore. I make about 12 lakhs a year mostly from clients in the US and UK.')">Freelance Designer</button>
+<button class="example-chip px-3 py-1 rounded-full bg-surface-container hover:bg-surface-dim font-label-sm text-label-sm text-primary-container transition-colors duration-200 cursor-pointer card-border" onclick="setExampleText('We run a small clothing boutique in Delhi. Annual turnover is roughly 45 Lakhs. We buy from local weavers and sell from our shop.')">Clothing Boutique</button>
+<button class="example-chip px-3 py-1 rounded-full bg-surface-container hover:bg-surface-dim font-label-sm text-label-sm text-primary-container transition-colors duration-200 cursor-pointer card-border" onclick="setExampleText('I provide catering services for small events in Pune. Making around 1.5 Lakhs per month. Paying 3 helpers in cash.')">Event Caterer</button>
+</div>
+<div class="pt-4 flex justify-end">
+<button class="bg-secondary text-white px-8 py-4 rounded-[14px] font-label-md hover:bg-on-secondary-container transition-all duration-200 shadow-md flex items-center gap-2 w-full md:w-auto justify-center" id="analyzeBtn" onclick="analyzeBusiness()">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">auto_awesome</span>
+                            Get My Guidance
+                        </button>
+</div>
+</div>
+</div>
+<!-- Loading State -->
+<div class="hidden mt-8 text-center p-8 bg-surface-container-lowest rounded-[14px] card-border ambient-shadow" id="loadingState">
+<div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-secondary border-t-transparent mb-4"></div>
+<p class="font-label-md text-label-md text-primary-container">Analyzing your business details...</p>
+</div>
+<!-- Results Area -->
+<div class="hidden mt-8 space-y-6" id="resultsArea">
+<!-- Profile Summary Card -->
+<div class="bg-surface-container-lowest rounded-[14px] p-6 card-border ambient-shadow">
+<h3 class="font-headline-md text-headline-md text-primary-container border-b border-surface-container-high pb-4 mb-4">Your Business Profile</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div>
+<p class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-1">Estimated Revenue</p>
+<p class="font-body-md text-body-md font-semibold text-primary-container" id="resRevenue">-</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-1">Business Type</p>
+<p class="font-body-md text-body-md font-semibold text-primary-container" id="resType">-</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-1">Location</p>
+<p class="font-body-md text-body-md font-semibold text-primary-container" id="resState">-</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-1">Udyam Eligible</p>
+<p class="font-body-md text-body-md font-semibold text-secondary" id="resUdyam">-</p>
+</div>
+</div>
+</div>
+<!-- GST & Tax Insights -->
+<div class="grid md:grid-cols-2 gap-6">
+<div class="bg-surface-container-lowest rounded-[14px] p-6 card-border ambient-shadow flex flex-col h-full">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined">receipt_long</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary-container">GST Status</h3>
+</div>
+<div class="font-body-md text-body-md text-on-surface-variant flex-grow" id="resGst">-</div>
+<div class="mt-4 p-4 bg-surface rounded-lg border border-surface-container-high">
+<p class="font-label-sm text-label-sm text-primary-container font-semibold mb-1">Key Flags Identified</p>
+<ul class="font-body-sm text-body-sm text-on-surface-variant list-disc pl-4 space-y-1" id="resFlags"></ul>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-[14px] p-6 card-border ambient-shadow flex flex-col h-full">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary-container">Income Tax Estimate</h3>
+</div>
+<div class="font-body-md text-body-md text-on-surface-variant flex-grow" id="resTax">-</div>
+</div>
+</div>
+<!-- Recommended Next Steps -->
+<div class="bg-surface-container-lowest rounded-[14px] p-6 card-border ambient-shadow">
+<h3 class="font-headline-md text-headline-md text-primary-container mb-4">Recommended Next Steps</h3>
+<ul class="space-y-3" id="resBenefits">
+<!-- Populated by JS -->
+</ul>
+</div>
+<div class="flex justify-center mt-6">
+
+</div>
+</div>
+</section>
+<!-- Features Section -->
+<section class="max-w-7xl mx-auto px-container-padding py-section-gap-lg">
+<div class="text-center mb-12">
+<h2 class="font-headline-lg text-headline-lg text-primary-container mb-4">What you will get</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Comprehensive guidance tailored to your specific business profile.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+<!-- Feature 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-[14px] card-border ambient-shadow hover:-translate-y-1 transition-transform duration-300">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-secondary mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;wght&quot; 300;">app_registration</span>
+</div>
+<h3 class="font-label-md text-label-md text-primary-container mb-2">Registration</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Know exactly which licenses and registrations you need.</p>
+</div>
+<!-- Feature 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-[14px] card-border ambient-shadow hover:-translate-y-1 transition-transform duration-300">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-secondary mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;wght&quot; 300;">calculate</span>
+</div>
+<h3 class="font-label-md text-label-md text-primary-container mb-2">Taxes</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Understand your GST and income tax obligations simply.</p>
+</div>
+<!-- Feature 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-[14px] card-border ambient-shadow hover:-translate-y-1 transition-transform duration-300">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-secondary mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;wght&quot; 300;">redeem</span>
+</div>
+<h3 class="font-label-md text-label-md text-primary-container mb-2">Benefits</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Discover government schemes you qualify for.</p>
+</div>
+<!-- Feature 4 -->
+<div class="bg-surface-container-lowest p-6 rounded-[14px] card-border ambient-shadow hover:-translate-y-1 transition-transform duration-300">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-secondary mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;wght&quot; 300;">verified</span>
+</div>
+<h3 class="font-label-md text-label-md text-primary-container mb-2">Compliance</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Stay on the right side of the law with clear deadlines.</p>
+</div>
+<!-- Feature 5 -->
+<div class="bg-surface-container-lowest p-6 rounded-[14px] card-border ambient-shadow hover:-translate-y-1 transition-transform duration-300">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-secondary mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;wght&quot; 300;">savings</span>
+</div>
+<h3 class="font-label-md text-label-md text-primary-container mb-2">Ways to Save</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Identify legitimate ways to minimize your tax burden.</p>
+</div>
+</div>
+</section>
+<!-- Process Section -->
+<section id="how-it-works" class="bg-surface-container-low border-y border-surface-container-high py-section-gap-lg"></section>
+<div class="max-w-7xl mx-auto px-container-padding">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-primary-container mb-4">How it works</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">A simple, four-step process to financial clarity.</p>
+</div>
+<div class="relative">
+<!-- Connecting Line (Desktop) -->
+<div class="hidden md:block absolute top-8 left-[10%] right-[10%] h-[2px] bg-outline-variant z-0"></div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
+<!-- Step 1 -->
+<div class="flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full bg-primary-container text-white flex items-center justify-center font-headline-md text-headline-md mb-6 shadow-md border-4 border-surface-container-low">1</div>
+<h3 class="font-label-md text-label-md text-primary-container mb-2">Tell us about your business</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Use plain language to describe your operations.</p>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full bg-surface-container-lowest text-primary-container flex items-center justify-center font-headline-md text-headline-md mb-6 card-border ambient-shadow border-4 border-surface-container-low">2</div>
+<h3 class="font-label-md text-label-md text-primary-container mb-2">We analyze it</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Our smart system identifies your requirements.</p>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full bg-surface-container-lowest text-primary-container flex items-center justify-center font-headline-md text-headline-md mb-6 card-border ambient-shadow border-4 border-surface-container-low">3</div>
+<h3 class="font-label-md text-label-md text-primary-container mb-2">Get clear answers</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Review a simple, jargon-free guidance report.</p>
+</div>
+<!-- Step 4 -->
+<div class="flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full bg-secondary text-white flex items-center justify-center font-headline-md text-headline-md mb-6 shadow-md border-4 border-surface-container-low">4</div>
+<h3 class="font-label-md text-label-md text-primary-container mb-2">Grow with confidence</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Implement the steps and focus on expansion.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust Section -->
+<section id="why-go-formal" class="max-w-7xl mx-auto px-container-padding py-section-gap-lg"></section>
+<div class="bg-[#FFFDF5] rounded-[24px] p-8 md:p-12 border border-[#EBE4C9] shadow-sm">
+<div class="flex flex-col lg:flex-row gap-12 items-center">
+<div class="lg:w-1/3">
+<h2 class="font-headline-lg text-headline-lg text-[#5A4500] mb-4">Why go formal?</h2>
+<p class="font-body-md text-body-md text-[#755B00]">Operating in the formal economy opens doors to growth that informal businesses simply cannot access.</p>
+</div>
+<div class="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div class="flex gap-4">
+<div class="mt-1 text-[#C9A227]">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-[#5A4500] mb-1">Access to Loans</h3>
+<p class="font-body-sm text-body-sm text-[#755B00]">Banks require formal documentation for business credit.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="mt-1 text-[#C9A227]">
+<span class="material-symbols-outlined">assured_workload</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-[#5A4500] mb-1">Government Schemes</h3>
+<p class="font-body-sm text-body-sm text-[#755B00]">Qualify for subsidies and support programs.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="mt-1 text-[#C9A227]">
+<span class="material-symbols-outlined">handshake</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-[#5A4500] mb-1">Customer Trust</h3>
+<p class="font-body-sm text-body-sm text-[#755B00]">Larger clients prefer dealing with registered entities.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="mt-1 text-[#C9A227]">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-[#5A4500] mb-1">Growth with Fewer Worries</h3>
+<p class="font-body-sm text-body-sm text-[#755B00]">Operate legally without fear of sudden penalties.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface full-width bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant flat no shadows w-full py-section-gap-md px-container-padding flex flex-col md:flex-row justify-between items-start gap-8 mt-12">
+<div class="flex flex-col gap-4 max-w-sm">
+<div class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim">
+                Tax-Simplicity Advisor
+            </div>
+<p class="font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface">
+                © 2024 Informal Economy Tax-Simplicity Advisor. This tool provides general guidance and is not a substitute for professional legal or financial advice.
+            </p>
+</div>
+
+<div class="flex flex-col gap-2">
+
+
+
+</div>
+</footer>
+<!-- Logic Script (Preserved exactly as requested) -->
+<script>
+        // Character counter
+        const inputField = document.getElementById('businessInput');
+        const charCount = document.getElementById('charCount');
+        
+        inputField.addEventListener('input', function() {
+            charCount.textContent = this.value.length;
+        });
+
+        // Helper to set example text
+        function setExampleText(text) {
+            inputField.value = text;
+            charCount.textContent = text.length;
+            inputField.focus();
+        }
+
+        function fmtINR(n) {
+            return "₹" + Math.round(n).toLocaleString('en-IN');
+        }
+
+        async function analyzeBusiness() {
+            const input = document.getElementById('businessInput').value.trim();
+            const loadingArea = document.getElementById('loadingState');
+            const resultsArea = document.getElementById('resultsArea');
+
+            if (input.length < 10) {
+                alert("Please provide more details about your business.");
+                return;
+            }
+
+            resultsArea.classList.add('hidden');
+            loadingArea.classList.remove('hidden');
+
+            try {
+                const res = await fetch('/api/analyze', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: input })
+                });
+
+                if (!res.ok) {
+                    const err = await res.json().catch(() => ({}));
+                    throw new Error(err.error || 'Something went wrong.');
+                }
+
+                const data = await res.json();
+                renderResults(data);
+
+                loadingArea.classList.add('hidden');
+                resultsArea.classList.remove('hidden');
+                resultsArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } catch (e) {
+                loadingArea.classList.add('hidden');
+                alert("Couldn't analyze your business: " + e.message + "\n\nMake sure the Flask server (app.py) is running.");
+            }
+        }
+
+        // data comes straight from Flask's /api/analyze — real extractor.py + rules_engine.py output
+        function renderResults(data) {
+            const profile = data.profile;
+            const gst = data.gst;
+            const tax = data.presumptiveTax;
+            const udyam = data.udyamTier;
+            const benefits = data.benefits || [];
+
+            document.getElementById('resRevenue').textContent =
+                profile.revenue !== null ? fmtINR(profile.revenue) + "/year" : "Not detected";
+            document.getElementById('resType').textContent =
+                profile.type ? profile.type.charAt(0).toUpperCase() + profile.type.slice(1) : "-";
+            document.getElementById('resState').textContent =
+                profile.state ? profile.state.charAt(0).toUpperCase() + profile.state.slice(1) : "Not detected";
+            document.getElementById('resUdyam').textContent = udyam || "N/A";
+
+            // GST status
+            let gstEl = document.getElementById('resGst');
+            if (gst) {
+                gstEl.textContent = gst.required
+                    ? `Registration required — revenue exceeds the ${fmtINR(gst.threshold)} threshold for your category.`
+                    : `Not required yet — threshold for your category is ${fmtINR(gst.threshold)}/year.`;
+                gstEl.classList.toggle("text-error", gst.required);
+                gstEl.classList.toggle("font-bold", gst.required);
+            } else {
+                gstEl.textContent = "Add a revenue figure (e.g. '15,000 a month') for a GST status.";
+                gstEl.classList.remove("text-error", "font-bold");
+            }
+
+            // Key flags
+            let flagsUl = document.getElementById('resFlags');
+            flagsUl.innerHTML = "";
+            const flags = [];
+            if (profile.isWoman) flags.push("Woman-owned business");
+            if (profile.isScSt) flags.push("SC/ST entrepreneur");
+            if (profile.isNew) flags.push("New business");
+            if (gst && gst.is_special_state) flags.push("Special-category state (lower GST threshold)");
+            if (flags.length === 0) flags.push("No special flags detected");
+            flags.forEach(f => {
+                let li = document.createElement('li');
+                li.textContent = f;
+                flagsUl.appendChild(li);
+            });
+
+            // Income tax estimate
+            let taxEl = document.getElementById('resTax');
+            if (tax && tax.applicable) {
+                taxEl.textContent = `Under Section ${tax.section}, deemed taxable profit is ${fmtINR(tax.deemed_profit)}. Estimated tax: ${fmtINR(tax.estimated_tax)}` +
+                    (tax.estimated_tax === 0 ? " (below the ₹7,00,000 rebate limit, so no tax is owed)." : ".");
+            } else if (tax) {
+                taxEl.textContent = tax.reason || "Standard tax filing rules apply.";
+            } else {
+                taxEl.textContent = "Add a revenue figure for a tax estimate.";
+            }
+
+            // Benefits
+            let benUl = document.getElementById('resBenefits');
+            benUl.innerHTML = "";
+            if (benefits.length === 0) {
+                let li = document.createElement('li');
+                li.className = "flex gap-3 items-start p-3 bg-surface rounded-lg border border-surface-container-high";
+                li.innerHTML = `<span class="material-symbols-outlined text-secondary mt-0.5">info</span> <span class="font-body-sm text-body-sm text-on-surface-variant">No specific benefits matched — add more detail for better matches.</span>`;
+                benUl.appendChild(li);
+            } else {
+                benefits.forEach(b => {
+                    let li = document.createElement('li');
+                    li.className = "flex gap-3 items-start p-3 bg-surface rounded-lg border border-surface-container-high";
+                    li.innerHTML = `<span class="material-symbols-outlined text-secondary mt-0.5">check_circle</span> <span class="font-body-sm text-body-sm text-on-surface-variant"><strong>${b.name}</strong> — ${b.description}</span>`;
+                    benUl.appendChild(li);
+                });
+            }
+        }
+
+        function toggleCard(headerEl) {
+            // Functionality not strictly needed in this new design layout as results are displayed differently, 
+            // but preserved to satisfy the "keep all existing Javascript logic" requirement exactly.
+            let content = headerEl.nextElementSibling;
+            let icon = headerEl.querySelector('.material-symbols-outlined');
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.textContent = "expand_less";
+            } else {
+                content.classList.add('hidden');
+                icon.textContent = "expand_more";
+            }
+        }
+    </script>
+
+
+</body></html>

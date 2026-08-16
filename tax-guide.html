@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tax Guidance &amp; Advice — Informal Economy Tax-Simplicity Advisor</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #0B1F3A;
+    --blue: #163B65;
+    --bg: #F7F9FC;
+    --card: #FFFFFF;
+    --gold: #C9A227;
+    --gold-soft: #F4E8C8;
+    --text: #172033;
+    --text-muted: #5A6478;
+    --teal: #167D68;
+    --teal-soft: #DCEEE9;
+    --border: #E3E8F0;
+    --radius: 14px;
+    --shadow: 0 4px 20px rgba(11, 31, 58, 0.06);
+    --shadow-lg: 0 12px 40px rgba(11, 31, 58, 0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .display {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+  }
+
+  a { text-decoration: none; color: inherit; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+  .container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- Header (same as home) ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-mark {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .logo-text { line-height: 1.2; }
+  .logo-text .brand {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--navy);
+  }
+  .logo-text .sub { font-size: 12.5px; color: var(--text-muted); }
+
+  nav.links { display: flex; gap: 34px; }
+  nav.links a {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--text-muted);
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.15s;
+  }
+  nav.links a:hover { color: var(--navy); }
+  nav.links a.active {
+    color: var(--navy);
+    border-bottom: 2px solid var(--gold);
+  }
+
+  @media (max-width: 860px) {
+    nav.links { display: none; }
+  }
+
+  /* ---------- Page hero ---------- */
+  .page-hero { padding: 60px 0 8px; text-align: center; }
+  .page-hero h1 { font-size: 38px; line-height: 1.15; margin-bottom: 14px; }
+  .page-hero p {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Guide grid ---------- */
+  .guide-section { padding: 44px 0 20px; }
+  .guide-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 18px;
+    align-items: start;
+  }
+
+  .guide-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: box-shadow 0.18s;
+  }
+  .guide-card:hover { box-shadow: var(--shadow-lg); }
+
+  .guide-card-toggle {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 22px 22px;
+    text-align: left;
+    background: transparent;
+  }
+
+  .guide-icon {
+    width: 46px; height: 46px;
+    border-radius: 12px;
+    background: var(--teal-soft);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 21px;
+    flex-shrink: 0;
+  }
+
+  .guide-card-head { flex: 1; }
+  .guide-card-head h3 {
+    font-size: 16.5px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .guide-card-head p {
+    font-size: 13.5px;
+    color: var(--text-muted);
+  }
+
+  .chevron {
+    flex-shrink: 0;
+    width: 18px; height: 18px;
+    color: var(--text-muted);
+    transition: transform 0.2s ease;
+    margin-top: 2px;
+  }
+  .guide-card.open .chevron { transform: rotate(180deg); color: var(--teal); }
+
+  .guide-card-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.28s ease;
+  }
+  .guide-card.open .guide-card-body { max-height: 900px; }
+
+  .guide-card-body-inner {
+    padding: 0 22px 24px 82px;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .guide-card-body-inner p { margin-bottom: 10px; }
+  .guide-card-body-inner p:last-child { margin-bottom: 0; }
+  .guide-card-body-inner ul {
+    margin: 0 0 10px 18px;
+  }
+  .guide-card-body-inner li { margin-bottom: 6px; }
+  .guide-card-body-inner .mini-note {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    padding-top: 10px;
+    margin-top: 12px;
+  }
+
+  @media (max-width: 560px) {
+    .guide-card-body-inner { padding-left: 22px; }
+  }
+
+  /* ---------- Footer (same as home) ---------- */
+  footer { padding: 26px 0 40px; }
+  .foot-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: #EEF2F8;
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .foot-note svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; color: var(--blue); }
+</style>
+</head>
+<body>
+<header>
+<div class="nav-inner">
+<a class="logo" href="/" style="cursor:pointer;">
+<div class="logo-mark">
+<svg fill="none" height="22" viewbox="0 0 24 24" width="22">
+<path d="M6 3H14L18 7V21H6V3Z" stroke="#F7F9FC" stroke-linejoin="round" stroke-width="1.6"></path>
+<path d="M14 3V7H18" stroke="#F7F9FC" stroke-linejoin="round" stroke-width="1.6"></path>
+<path d="M9 12H15M9 15.5H15" stroke="#C9A227" stroke-linecap="round" stroke-width="1.6"></path>
+</svg>
+</div>
+<div class="logo-text">
+<div class="brand">Informal Economy</div>
+<div class="sub">Tax-Simplicity Advisor</div>
+</div>
+</a>
+<nav class="links">
+<a href="/">Home</a>
+<a href="/#how-it-works">How it Works</a>
+<a class="active" href="/tax-guide">Tax Guide</a>
+<a href="/#benefits">Benefits</a>
+<a href="/#resources">Resources</a>
+<a href="/#about">About</a>
+</nav>
+</div>
+</header>
+<main class="container" id="top">
+<!-- PAGE HERO -->
+<section class="page-hero" style="display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; gap: 48px; text-align: left; padding: 80px 0 40px;">
+<div>
+<h1 style="font-size: 48px; margin-bottom: 20px; color: var(--navy);">Tax Guidance &amp; Advice</h1>
+<p style="font-size: 18px; line-height: 1.6; color: var(--text-muted); max-width: 100%; margin: 0;">Simple, plain-language explanations to help you understand taxes, filing, and compliance. Tap any card to read more.</p>
+</div>
+<div style="border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg);">
+<img alt="Business owner reviewing tax guide" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4H0stGLXu-dd7JD0Xmrf3qra3TUiM67-8qeAFUJGWkgHbY09yn0sVEBMlYqb9VpHlvwW6R8Ji9xwbYFJCETB81YoB2bmra9YgXWRYfmniMZ62Y6CwYvriaUJ2GPnHfoNj0ZTAaYJEPPm6-vPTXRPyJcVVbEB5jMuCRABijJRaUiipf9CVKRFtCEYrpaeQumPKwaNNL6EoRpzOnCKsI7avAfg_YHWbhEySEUFyjyA833NqAz1E0UGW" style="width: 100%; height: auto; display: block;"/>
+</div>
+</section>
+<!-- GUIDE CARDS -->
+<section class="guide-section">
+<div class="guide-grid" id="guideGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 24px;">
+<div class="guide-card" data-card="0"><button class="guide-card-toggle" onclick="toggleCard(0)" style="padding: 28px;">
+<div style="display: flex; flex-direction: column; gap: 12px; margin-right: 20px;">
+<span style="font-family: 'Fraunces', serif; font-weight: 700; color: var(--gold); font-size: 14px; opacity: 0.6;">01</span>
+<div class="guide-icon" style="background: var(--teal-soft); color: var(--teal);">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" x2="8" y1="13" y2="13"></line><line x1="16" x2="8" y1="17" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+</div>
+</div>
+<div class="guide-card-head">
+<h3 style="font-size: 18px;">Income Tax Basics
+              <svg class="chevron" fill="none" viewbox="0 0 24 24"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</h3>
+<p>Understand how income tax works and who may need to pay it.</p>
+</div>
+</button>
+<div class="guide-card-body">
+<div class="guide-card-body-inner" style="padding: 0 28px 32px 28px;">
+<p style="margin-bottom: 16px;">Income tax is a tax on the profit or income you earn in a financial year — whether from a salary, a shop, a service, or freelance work. If you run a business, tax is calculated on your <strong style="color: var(--navy);">net profit</strong> (what's left after business expenses), not your total sales.</p>
+<div style="background: var(--bg); padding: 20px; border-radius: 10px; margin-bottom: 16px;">
+<p style="font-weight: 600; margin-bottom: 12px; color: var(--navy);">New Tax Regime Slab Rates:</p>
+<ul style="list-style: none; margin: 0; padding: 0;">
+<li style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border);"><span>Up to ₹3,00,000</span> <span style="font-weight: 600;">No Tax</span></li>
+<li style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border);"><span>₹3,00,000–₹7,00,000</span> <span style="font-weight: 600; color: var(--teal);">5%</span></li>
+<li style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border);"><span>₹7,00,000–₹10,00,000</span> <span style="font-weight: 600; color: var(--teal);">10%</span></li>
+<li style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border);"><span>₹10,00,000–₹12,00,000</span> <span style="font-weight: 600; color: var(--teal);">15%</span></li>
+<li style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border);"><span>₹12,00,000–₹15,00,000</span> <span style="font-weight: 600; color: var(--teal);">20%</span></li>
+<li style="display: flex; justify-content: space-between; padding: 4px 0;"><span>Above ₹15,00,000</span> <span style="font-weight: 600; color: var(--teal);">30%</span></li>
+</ul>
+</div>
+<p>If your total taxable income is up to <span style="color: var(--navy); font-weight: 600;">₹7,00,000</span>, a rebate under Section 87A usually brings your tax down to zero.</p>
+<p class="mini-note">Slab rates and rebate limits are reviewed periodically — always check the current year's rules or a tax professional before relying on exact figures.</p>
+</div>
+</div></div>
+<div class="guide-card" data-card="1"><button class="guide-card-toggle" onclick="toggleCard(1)" style="padding: 28px;">
+<div style="display: flex; flex-direction: column; gap: 12px; margin-right: 20px;">
+<span style="font-family: 'Fraunces', serif; font-weight: 700; color: var(--gold); font-size: 14px; opacity: 0.6;">02</span>
+<div class="guide-icon" style="background: var(--teal-soft); color: var(--teal);">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24"><rect height="16" rx="2" width="20" x="2" y="4"></rect><path d="M7 15h0M2 9.5h20"></path></svg>
+</div>
+</div>
+<div class="guide-card-head">
+<h3 style="font-size: 18px;">Tax Deductions &amp; Exemptions
+              <svg class="chevron" fill="none" viewbox="0 0 24 24"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</h3>
+<p>Learn about common deductions and exemptions that may reduce your tax.</p>
+</div>
+</button>
+<div class="guide-card-body">
+<div class="guide-card-body-inner" style="padding: 0 28px 32px 28px;">
+<p style="margin-bottom: 16px;">Small business owners and professionals can often reduce paperwork and tax using <strong style="color: var(--navy);">presumptive taxation</strong>:</p>
+<ul style="margin-bottom: 16px;">
+<li style="margin-bottom: 12px;"><strong style="color: var(--teal);">Section 44AD</strong> (goods/trading) — deemed profit of just 8% of turnover (6% if payments are received digitally), up to ₹2 crore turnover.</li>
+<li><strong style="color: var(--teal);">Section 44ADA</strong> (professionals/freelancers) — deemed profit of 50% of receipts, up to ₹75 lakh turnover.</li>
+</ul>
+<p>Genuine business expenses — rent, raw materials, transport, staff wages — also reduce your taxable profit if you're not using presumptive taxation. Individuals under the old tax regime may additionally claim exemptions for things like insurance premiums, certain investments, and home loan interest.</p>
+<p class="mini-note">Which deductions apply depends on the regime you choose and your business type — a tax professional can help pick the option that saves you the most.</p>
+</div>
+</div></div>
+<div class="guide-card" data-card="2"><button class="guide-card-toggle" onclick="toggleCard(2)" style="padding: 28px;">
+<div style="display: flex; flex-direction: column; gap: 12px; margin-right: 20px;">
+<span style="font-family: 'Fraunces', serif; font-weight: 700; color: var(--gold); font-size: 14px; opacity: 0.6;">03</span>
+<div class="guide-icon" style="background: var(--teal-soft); color: var(--teal);">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect height="4" rx="1" width="8" x="8" y="2"></rect><path d="M9 14h6"></path><path d="M9 18h6"></path><path d="M9 10h6"></path></svg>
+</div>
+</div>
+<div class="guide-card-head">
+<h3 style="font-size: 18px;">ITR Filing Guide
+              <svg class="chevron" fill="none" viewbox="0 0 24 24"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</h3>
+<p>Learn who needs to file an ITR, what documents are needed, and the basic filing steps.</p>
+</div>
+</button>
+<div class="guide-card-body">
+<div class="guide-card-body-inner" style="padding: 0 28px 32px 28px;">
+<p style="margin-bottom: 16px;">You generally need to file an Income Tax Return (ITR) if your income is above the basic exemption limit, even if no tax is finally payable — and filing can also help when applying for loans or visas.</p>
+<p style="font-weight: 600; color: var(--navy); margin-bottom: 8px;">Documents you'll usually need:</p>
+<ul style="margin-bottom: 16px;">
+<li>PAN and Aadhaar</li>
+<li>Bank account statements</li>
+<li>Sales/income and expense records</li>
+<li>Form 16 (if salaried) or business income summary</li>
+</ul>
+<p>Basic steps: choose the correct ITR form for your income type, total your income and eligible deductions, pay any tax due, file the return online, and complete e-verification.</p>
+<p class="mini-note">The filing deadline for most individuals and small businesses (without an audit requirement) is usually 31 July — confirm the exact date each year.</p>
+</div>
+</div></div>
+<div class="guide-card" data-card="3"><button class="guide-card-toggle" onclick="toggleCard(3)" style="padding: 28px;">
+<div style="display: flex; flex-direction: column; gap: 12px; margin-right: 20px;">
+<span style="font-family: 'Fraunces', serif; font-weight: 700; color: var(--gold); font-size: 14px; opacity: 0.6;">04</span>
+<div class="guide-icon" style="background: var(--teal-soft); color: var(--teal);">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24"><rect height="16" rx="2" width="16" x="4" y="4"></rect><path d="M9 22V2"></path><path d="M15 22V2"></path><path d="M4 9h16"></path><path d="M4 15h16"></path></svg>
+</div>
+</div>
+<div class="guide-card-head">
+<h3 style="font-size: 18px;">GST Basics
+              <svg class="chevron" fill="none" viewbox="0 0 24 24"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</h3>
+<p>Understand GST, registration, invoices, and basic compliance.</p>
+</div>
+</button>
+<div class="guide-card-body">
+<div class="guide-card-body-inner" style="padding: 0 28px 32px 28px;">
+<p style="margin-bottom: 16px;">GST (Goods and Services Tax) is charged on the sale of most goods and services. Registration is generally required once your annual turnover crosses:</p>
+<ul style="margin-bottom: 16px;">
+<li><strong style="color: var(--navy);">₹40,00,000</strong> for goods (₹20,00,000 in special-category states)</li>
+<li><strong style="color: var(--navy);">₹20,00,000</strong> for services (₹10,00,000 in special-category states)</li>
+</ul>
+<p>Once registered, you'll need to issue proper GST invoices, charge the correct tax rate on your sales, and file periodic returns (like GSTR-1 for sales and GSTR-3B as a monthly/quarterly summary). Registered businesses can also claim input tax credit on GST paid for business purchases.</p>
+<p class="mini-note">Below the threshold, GST registration is optional — but some businesses register anyway to claim input credit or work with larger clients.</p>
+</div>
+</div></div>
+<div class="guide-card" data-card="4"><button class="guide-card-toggle" onclick="toggleCard(4)" style="padding: 28px;">
+<div style="display: flex; flex-direction: column; gap: 12px; margin-right: 20px;">
+<span style="font-family: 'Fraunces', serif; font-weight: 700; color: var(--gold); font-size: 14px; opacity: 0.6;">05</span>
+<div class="guide-icon" style="background: var(--teal-soft); color: var(--teal);">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24"><path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path></svg>
+</div>
+</div>
+<div class="guide-card-head">
+<h3 style="font-size: 18px;">Tax-Saving Strategies
+              <svg class="chevron" fill="none" viewbox="0 0 24 24"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</h3>
+<p>Discover simple and legal ways to reduce your tax burden.</p>
+</div>
+</button>
+<div class="guide-card-body">
+<div class="guide-card-body-inner" style="padding: 0 28px 32px 28px;">
+<p style="margin-bottom: 16px;">A few simple, legal habits can meaningfully lower what you owe:</p>
+<ul style="margin-bottom: 16px;">
+<li style="margin-bottom: 8px;"><strong style="color: var(--teal);">Digital Payments:</strong> Presumptive taxation rewards digital receipts with a lower deemed profit rate under Section 44AD.</li>
+<li style="margin-bottom: 8px;"><strong style="color: var(--teal);">Record Keeping:</strong> Keep basic records of sales and expenses, even informally — this supports any deduction or exemption you claim.</li>
+<li style="margin-bottom: 8px;"><strong style="color: var(--teal);">Udyam Registration:</strong> Register on Udyam (MSME) — it's free and can unlock lower-cost credit and scheme benefits.</li>
+<li style="margin-bottom: 8px;"><strong style="color: var(--teal);">Presumptive Taxation:</strong> Use 44AD/44ADA if eligible, to avoid maintaining detailed books of accounts.</li>
+<li><strong style="color: var(--teal);">Advance Tax:</strong> Pay on time to avoid interest charges if your yearly tax liability is significant.</li>
+</ul>
+<p class="mini-note">These are general pointers, not personalised advice — your best strategy depends on your specific income and business structure.</p>
+</div>
+</div></div>
+<div class="guide-card" data-card="5"><button class="guide-card-toggle" onclick="toggleCard(5)" style="padding: 28px;">
+<div style="display: flex; flex-direction: column; gap: 12px; margin-right: 20px;">
+<span style="font-family: 'Fraunces', serif; font-weight: 700; color: var(--gold); font-size: 14px; opacity: 0.6;">06</span>
+<div class="guide-icon" style="background: var(--teal-soft); color: var(--teal);">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24"><rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+</div>
+</div>
+<div class="guide-card-head">
+<h3 style="font-size: 18px;">Important Tax Deadlines
+              <svg class="chevron" fill="none" viewbox="0 0 24 24"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</h3>
+<p>Keep track of important ITR, GST, and other tax deadlines.</p>
+</div>
+</button>
+<div class="guide-card-body">
+<div class="guide-card-body-inner" style="padding: 0 28px 32px 28px;">
+<ul style="margin-bottom: 16px;">
+<li style="margin-bottom: 10px;"><strong style="color: var(--navy);">ITR filing:</strong> usually 31 July for individuals/businesses not requiring an audit.</li>
+<li style="margin-bottom: 10px;"><strong style="color: var(--navy);">GSTR-3B:</strong> monthly, typically by the 20th (or per your filing frequency).</li>
+<li style="margin-bottom: 10px;"><strong style="color: var(--navy);">GSTR-1:</strong> monthly or quarterly, depending on your turnover and scheme.</li>
+<li style="margin-bottom: 10px;"><strong style="color: var(--navy);">Advance tax:</strong> quarterly instalments — mid-June, mid-September, mid-December, and mid-March — if your total tax liability for the year exceeds ₹10,000.</li>
+<li><strong style="color: var(--navy);">GST annual return (GSTR-9):</strong> once a year, for registered businesses above the applicable turnover limit.</li>
+</ul>
+<p class="mini-note">Exact dates can shift slightly each year or get extended — always confirm on the official portals closer to the date.</p>
+</div>
+</div></div>
+<div class="guide-card" data-card="6"><button class="guide-card-toggle" onclick="toggleCard(6)" style="padding: 28px;">
+<div style="display: flex; flex-direction: column; gap: 12px; margin-right: 20px;">
+<span style="font-family: 'Fraunces', serif; font-weight: 700; color: var(--gold); font-size: 14px; opacity: 0.6;">07</span>
+<div class="guide-icon" style="background: var(--teal-soft); color: var(--teal);">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" x2="12.01" y1="17" y2="17"></line></svg>
+</div>
+</div>
+<div class="guide-card-head">
+<h3 style="font-size: 18px;">Frequently Asked Tax Questions
+              <svg class="chevron" fill="none" viewbox="0 0 24 24"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</h3>
+<p>Get simple answers to common tax-related questions.</p>
+</div>
+</button>
+<div class="guide-card-body">
+<div class="guide-card-body-inner" style="padding: 0 28px 32px 28px;">
+<div style="margin-bottom: 16px;">
+<p style="font-weight: 600; color: var(--navy); margin-bottom: 4px;">Do I need to register my business if I earn very little?</p>
+<p>Not necessarily for GST — registration depends on the turnover thresholds. But it's still worth checking if any free registrations (like Udyam) could help you.</p>
+</div>
+<div style="margin-bottom: 16px;">
+<p style="font-weight: 600; color: var(--navy); margin-bottom: 4px;">What happens if I don't file my ITR?</p>
+<p>You may face late fees, interest on unpaid tax, and difficulty accessing loans or government schemes that ask for filed returns.</p>
+</div>
+<div style="margin-bottom: 16px;">
+<p style="font-weight: 600; color: var(--navy); margin-bottom: 4px;">Is GST the same as income tax?</p>
+<p>No — GST is a tax on sales of goods/services, while income tax is a tax on your overall profit or income for the year. Many small businesses deal with both.</p>
+<div>
+<p style="font-weight: 600; color: var(--navy); margin-bottom: 4px;">Can I file taxes without an accountant?</p>
+<p>Yes, especially with presumptive taxation, many small business owners file on their own using the official e-filing portal — though a professional can help avoid mistakes as your business grows.</p>
+</div>
+</div>
+</div></div></div>
+</div>
+</section>
+<footer><div class="container">
+<div style="background: var(--surface-container-low, #eff4fc); border-radius: 16px; padding: 32px; display: flex; gap: 24px; align-items: flex-start; border: 1px solid var(--border);">
+<div style="width: 48px; height: 48px; border-radius: 50%; background: var(--blue); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+<svg fill="none" height="24" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="16" y2="12"></line><line x1="12" x2="12.01" y1="8" y2="8"></line></svg>
+</div>
+<div>
+<h4 style="font-family: 'Fraunces', serif; font-size: 18px; color: var(--navy); margin-bottom: 8px;">Important Notice</h4>
+<p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0;">This page gives general guidance based on commonly applicable rules in the informal economy. Tax laws are complex and subject to change. For specific advice tailored to your business situation, please consult a qualified tax professional or chartered accountant.</p>
+</div>
+</div>
+<div style="text-align: center; margin-top: 40px; font-size: 13px; color: var(--text-muted);">
+      © 2024 Informal Economy Tax-Simplicity Advisor. All rights reserved.
+    </div>
+</div></footer>
+</main>
+<script>
+function toggleCard(i) {
+  const card = document.querySelector('.guide-card[data-card="' + i + '"]');
+  card.classList.toggle('open');
+}
+</script>
+</body>
+</html>

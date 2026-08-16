@@ -1,0 +1,82 @@
+{
+  "gst_thresholds": {
+    "goods_normal_states": 4000000,
+    "goods_special_states": 2000000,
+    "services": 2000000,
+    "services_special_states": 1000000,
+    "special_category_states": [
+      "manipur", "mizoram", "nagaland", "tripura", "arunachal pradesh",
+      "meghalaya", "sikkim", "uttarakhand", "assam", "himachal pradesh", "jammu and kashmir"
+    ]
+  },
+  "presumptive_taxation_44AD": {
+    "eligible_max_turnover": 20000000,
+    "digital_receipts_max_turnover": 30000000,
+    "profit_rate_cash": 0.08,
+    "profit_rate_digital": 0.06,
+    "description": "Section 44AD: presumptive taxation for small businesses. Tax is calculated on a deemed profit percentage of turnover instead of maintaining full books."
+  },
+  "presumptive_taxation_44ADA": {
+    "eligible_max_turnover": 7500000,
+    "profit_rate": 0.50,
+    "description": "Section 44ADA: presumptive taxation for professionals (consultants, freelancers) - 50% of receipts deemed as profit."
+  },
+  "income_tax_slabs_new_regime_2024": [
+    {"upto": 300000, "rate": 0.0},
+    {"upto": 700000, "rate": 0.05},
+    {"upto": 1000000, "rate": 0.10},
+    {"upto": 1200000, "rate": 0.15},
+    {"upto": 1500000, "rate": 0.20},
+    {"upto": null, "rate": 0.30}
+  ],
+  "rebate_87A_limit": 700000,
+  "udyam_msme_tiers": {
+    "micro": {"investment_max": 2500000, "turnover_max": 10000000},
+    "small": {"investment_max": 25000000, "turnover_max": 100000000},
+    "medium": {"investment_max": 125000000, "turnover_max": 500000000}
+  },
+  "benefits": [
+    {
+      "id": "udyam_registration",
+      "name": "Udyam (MSME) Registration",
+      "requires": "any_business",
+      "description": "Free registration unlocking priority-sector lending, subsidies, and government tender access."
+    },
+    {
+      "id": "mudra_loan_shishu",
+      "name": "Mudra Loan - Shishu (up to ₹50,000)",
+      "requires": "annual_turnover_below_1000000",
+      "description": "Collateral-free micro-loan for very small/starting businesses."
+    },
+    {
+      "id": "mudra_loan_kishor",
+      "name": "Mudra Loan - Kishor (₹50,000 - ₹5 lakh)",
+      "requires": "annual_turnover_1000000_to_5000000",
+      "description": "Collateral-free loan for growing small businesses."
+    },
+    {
+      "id": "mudra_loan_tarun",
+      "name": "Mudra Loan - Tarun (₹5 lakh - ₹10 lakh)",
+      "requires": "annual_turnover_above_5000000_below_10000000",
+      "description": "Collateral-free loan for established micro businesses ready to scale."
+    },
+    {
+      "id": "pmegp_subsidy",
+      "name": "PMEGP Subsidy (15-35% capital subsidy)",
+      "requires": "new_business_manufacturing_or_service",
+      "description": "Prime Minister's Employment Generation Programme - capital subsidy for new micro-enterprises."
+    },
+    {
+      "id": "stand_up_india",
+      "name": "Stand-Up India Scheme",
+      "requires": "sc_st_woman_entrepreneur",
+      "description": "Loans between ₹10 lakh - ₹1 crore for SC/ST and women entrepreneurs setting up greenfield enterprises."
+    },
+    {
+      "id": "presumptive_tax_relief",
+      "name": "Presumptive Taxation Simplification",
+      "requires": "turnover_below_20000000",
+      "description": "No need to maintain detailed books of accounts - pay tax on a deemed profit percentage."
+    }
+  ]
+}

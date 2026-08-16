@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources — Informal Economy Tax-Simplicity Advisor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1F3A;
+    --blue: #163B65;
+    --bg: #F7F9FC;
+    --card: #FFFFFF;
+    --gold: #C9A227;
+    --gold-soft: #F4E8C8;
+    --text: #172033;
+    --text-muted: #5A6478;
+    --teal: #167D68;
+    --teal-soft: #DCEEE9;
+    --border: #E3E8F0;
+    --radius: 14px;
+    --shadow: 0 4px 20px rgba(11, 31, 58, 0.06);
+    --shadow-lg: 0 12px 40px rgba(11, 31, 58, 0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .display {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+  }
+
+  a { text-decoration: none; color: inherit; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+
+  /* ---------- Header (same as home) ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .logo { display: flex; align-items: center; gap: 12px; }
+
+  .logo-mark {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .logo-text { line-height: 1.2; }
+  .logo-text .brand { font-family: 'Fraunces', serif; font-weight: 600; font-size: 17px; color: var(--navy); }
+  .logo-text .sub { font-size: 12.5px; color: var(--text-muted); }
+
+  nav.links { display: flex; gap: 34px; }
+  nav.links a {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--text-muted);
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.15s;
+  }
+  nav.links a:hover { color: var(--navy); }
+  nav.links a.active { color: var(--navy); border-bottom: 2px solid var(--gold); }
+
+  @media (max-width: 860px) { nav.links { display: none; } }
+
+  /* ---------- Page hero ---------- */
+  .page-hero { padding: 60px 0 8px; text-align: center; }
+  .page-hero h1 { font-size: 38px; line-height: 1.15; margin-bottom: 14px; }
+  .page-hero p { font-size: 16px; color: var(--text-muted); max-width: 560px; margin: 0 auto; }
+
+  /* ---------- Section blocks ---------- */
+  .res-section { padding: 44px 0 8px; }
+  .res-section-title {
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+  .res-section-title .tag {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif;
+    display: block;
+    margin-top: 4px;
+  }
+
+  .res-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .res-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px 22px;
+    transition: box-shadow 0.18s, transform 0.15s;
+  }
+  a.res-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+
+  .res-card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .res-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--teal-soft);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .res-card h4 { font-size: 15.5px; color: var(--navy); }
+  .res-card p { font-size: 13.5px; color: var(--text-muted); }
+  .res-link-arrow {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--teal);
+    margin-top: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* Documents list card */
+  .doc-list-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px 26px;
+  }
+  .doc-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 6px;
+  }
+  .doc-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14.5px;
+    color: var(--text);
+  }
+  .doc-item .check-dot {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--teal-soft);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .doc-item svg { width: 11px; height: 11px; }
+
+  /* Quick reference accordion (reuses guide-card pattern) */
+  .qref-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .qref-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .qref-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 18px 20px;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    font-family: 'Fraunces', serif;
+  }
+  .qref-chevron {
+    flex-shrink: 0;
+    width: 16px; height: 16px;
+    color: var(--text-muted);
+    transition: transform 0.2s ease;
+  }
+  .qref-card.open .qref-chevron { transform: rotate(180deg); color: var(--teal); }
+  .qref-body { max-height: 0; overflow: hidden; transition: max-height 0.28s ease; }
+  .qref-card.open .qref-body { max-height: 300px; }
+  .qref-body-inner { padding: 0 20px 18px; font-size: 14px; color: var(--text-muted); }
+
+  /* ---------- Back to home ---------- */
+  .back-home-wrap { padding: 40px 0 10px; text-align: center; }
+  .btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--teal);
+    color: #fff;
+    font-size: 14.5px;
+    font-weight: 600;
+    padding: 12px 22px;
+    border-radius: 9px;
+    transition: background 0.15s;
+  }
+  .btn-back:hover { background: #126454; }
+
+  /* ---------- Footer (same as home) ---------- */
+  footer { padding: 26px 0 40px; }
+  .foot-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: #EEF2F8;
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .foot-note svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; color: var(--blue); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="/" class="logo" style="cursor:pointer;">
+      <div class="logo-mark">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M6 3H14L18 7V21H6V3Z" stroke="#F7F9FC" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M14 3V7H18" stroke="#F7F9FC" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M9 12H15M9 15.5H15" stroke="#C9A227" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <div class="brand">Informal Economy</div>
+        <div class="sub">Tax-Simplicity Advisor</div>
+      </div>
+    </a>
+    <nav class="links">
+      <a href="/">Home</a>
+      <a href="/#how-it-works">How it Works</a>
+      <a href="/tax-guide">Tax Guide</a>
+      <a href="/#benefits">Benefits</a>
+      <a href="/resources" class="active">Resources</a>
+      <a href="/about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container" id="top">
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <h1>Resources</h1>
+    <p>Official links, documents you'll need, and quick answers to common tax terms — all in simple language.</p>
+  </section>
+
+  <!-- OFFICIAL TAX RESOURCES -->
+  <section class="res-section">
+    <h2 class="res-section-title">Official Tax Resources</h2>
+    <div class="res-grid">
+
+      <a class="res-card" href="https://www.incometax.gov.in" target="_blank" rel="noopener">
+        <div class="res-card-top">
+          <div class="res-icon">🏛️</div>
+          <h4>Income Tax Department</h4>
+        </div>
+        <p>ITR filing, PAN, and income-tax information.</p>
+        <span class="res-link-arrow">Visit site →</span>
+      </a>
+
+      <a class="res-card" href="https://www.gst.gov.in" target="_blank" rel="noopener">
+        <div class="res-card-top">
+          <div class="res-icon">🧾</div>
+          <h4>GST Portal</h4>
+        </div>
+        <p>GST registration and filing returns.</p>
+        <span class="res-link-arrow">Visit site →</span>
+      </a>
+
+      <a class="res-card" href="https://udyamregistration.gov.in" target="_blank" rel="noopener">
+        <div class="res-card-top">
+          <div class="res-icon">🏢</div>
+          <h4>Udyam Registration</h4>
+        </div>
+        <p>Official MSME registration for your business.</p>
+        <span class="res-link-arrow">Visit site →</span>
+      </a>
+
+      <a class="res-card" href="https://www.incometax.gov.in/iec/foportal" target="_blank" rel="noopener">
+        <div class="res-card-top">
+          <div class="res-icon">💻</div>
+          <h4>Income Tax e-Filing</h4>
+        </div>
+        <p>File your returns and access tax services online.</p>
+        <span class="res-link-arrow">Visit site →</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- USEFUL DOCUMENTS -->
+  <section class="res-section">
+    <h2 class="res-section-title">Useful Documents</h2>
+    <div class="doc-list-card">
+      <p style="font-size:14.5px; color:var(--text-muted); margin-bottom:14px;">Keep these handy — most tax and registration tasks will ask for one or more of these.</p>
+      <div class="doc-list">
+        <div class="doc-item">
+          <span class="check-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6L4.5 8.5L10 3" stroke="#167D68" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          PAN Card
+        </div>
+        <div class="doc-item">
+          <span class="check-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6L4.5 8.5L10 3" stroke="#167D68" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Aadhaar
+        </div>
+        <div class="doc-item">
+          <span class="check-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6L4.5 8.5L10 3" stroke="#167D68" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Bank statements
+        </div>
+        <div class="doc-item">
+          <span class="check-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6L4.5 8.5L10 3" stroke="#167D68" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Business invoices / receipts
+        </div>
+        <div class="doc-item">
+          <span class="check-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6L4.5 8.5L10 3" stroke="#167D68" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Previous year's ITR
+        </div>
+        <div class="doc-item">
+          <span class="check-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6L4.5 8.5L10 3" stroke="#167D68" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          GST documents, if applicable
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK REFERENCE -->
+  <section class="res-section">
+    <h2 class="res-section-title">Quick Reference</h2>
+    <div class="qref-grid" id="qrefGrid">
+
+      <div class="qref-card" data-qref="0">
+        <button class="qref-toggle" onclick="toggleQref(0)">
+          What is PAN?
+          <svg class="qref-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="qref-body">
+          <div class="qref-body-inner">PAN (Permanent Account Number) is a 10-character ID issued by the Income Tax Department. It's used to track your income and taxes, and is needed to file returns, open a bank account, or register a business.</div>
+        </div>
+      </div>
+
+      <div class="qref-card" data-qref="1">
+        <button class="qref-toggle" onclick="toggleQref(1)">
+          What is GST?
+          <svg class="qref-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="qref-body">
+          <div class="qref-body-inner">GST (Goods and Services Tax) is a tax added to the sale of most goods and services. If your business turnover crosses a certain limit, you must register for GST and collect/report this tax.</div>
+        </div>
+      </div>
+
+      <div class="qref-card" data-qref="2">
+        <button class="qref-toggle" onclick="toggleQref(2)">
+          What is ITR?
+          <svg class="qref-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="qref-body">
+          <div class="qref-body-inner">ITR (Income Tax Return) is the yearly form you file to report your income and pay any tax owed. Filing it can also help when applying for loans or visas, even if you owe little or no tax.</div>
+        </div>
+      </div>
+
+      <div class="qref-card" data-qref="3">
+        <button class="qref-toggle" onclick="toggleQref(3)">
+          What is presumptive taxation?
+          <svg class="qref-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="qref-body">
+          <div class="qref-body-inner">A simplified way to calculate tax for small businesses. Instead of tracking every expense, a fixed percentage of your turnover is treated as profit, and you pay tax on that — no detailed books required.</div>
+        </div>
+      </div>
+
+      <div class="qref-card" data-qref="4">
+        <button class="qref-toggle" onclick="toggleQref(4)">
+          What is an MSME?
+          <svg class="qref-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="qref-body">
+          <div class="qref-body-inner">MSME stands for Micro, Small, and Medium Enterprises. Registering as one (via Udyam) is free and can unlock loans, subsidies, and other government support for your business.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="back-home-wrap">
+    <a href="/" class="btn-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L11 6M5 12L11 18" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to Home
+    </a>
+  </div>
+
+  <footer>
+    <div class="foot-note">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 11V16M12 8V8.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <span>Links are provided for convenience and point to official government portals. This platform is not affiliated with any government agency.</span>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+function toggleQref(i) {
+  const card = document.querySelector('.qref-card[data-qref="' + i + '"]');
+  card.classList.toggle('open');
+}
+</script>
+
+</body>
+</html>
